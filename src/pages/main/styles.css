@@ -6,3 +6,8 @@
 .beer-list__col {
   padding: 8px;
 }
+
+.beer-img {
+  height: 170px;
+  width: 50px;
+}
