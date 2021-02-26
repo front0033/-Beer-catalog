@@ -5,7 +5,7 @@ interface IVolume {
   unit: string;
 }
 interface IBeerDTO {
-  id: string;
+  id: number;
   name: string;
   tagline: string;
   abv: number;
@@ -29,6 +29,9 @@ interface IBeerDTO {
 const beerApi = {
   get: () => {
     return ApiClient.get<{data: IBeerDTO[]}>(`/beers`);
+  },
+  getById: (id: string) => {
+    return ApiClient.get<{data: IBeerDTO}>(`/beers/${id}`);
   },
 };
 

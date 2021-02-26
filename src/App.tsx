@@ -2,13 +2,15 @@ import React from "react";
 
 import { Layout } from "antd";
 import { Header, Content, Footer } from "antd/lib/layout/layout";
+import BeerDetails from 'pages/detail';
 
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from 'react-router-dom';
-import MainPage from "./pages/main";
+import MainPage from 'pages/main';
+import routes from "routes";
 
 export default function App() {
   return (
@@ -18,8 +20,11 @@ export default function App() {
         <Content>
           <Router>
             <Switch>
-              <Route exact path="/">
+              <Route exact path={routes.main()}>
                 <MainPage />
+              </Route>
+              <Route path={routes.details()}>
+                <BeerDetails />
               </Route>
             </Switch>
           </Router>

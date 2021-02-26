@@ -1,10 +1,10 @@
 import { types, flow, applySnapshot } from 'mobx-state-tree';
-import Beer, { IBeer } from './beer';
 import beerApi from 'api/beer';
 import { ApiErrorsStore } from 'store';
+import BeerModel from './Beer';
 
 const BeerCollection = types.model({
-  items: types.array(Beer),
+  items: types.array(BeerModel),
 }).actions((self) => {
   const loadAll = flow(function* loadAll() {
     try {
@@ -14,10 +14,8 @@ const BeerCollection = types.model({
       ApiErrorsStore.addError(e)
     }
   });
+
   return {
-    addBeer: (beer: IBeer) => {
-      self.items.push(beer);
-    },
     loadAll,
   }
 })

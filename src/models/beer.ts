@@ -1,11 +1,33 @@
 import { types, Instance } from 'mobx-state-tree';
 
+export const initialBeer = {
+  id: 0,
+  name: '',
+  tagline: '',
+  abv: 0,
+  attenuation_level: 0,
+  boil_volume: { value: 0, unit: '' },
+  brewers_tips: '',
+  contributed_by: '',
+  description: '',
+  ebc: null,
+  first_brewed: '',
+  food_pairing: [],
+  ibu: null,
+  image_url: '',
+  ph: null,
+  srm: null,
+  target_fg: 0,
+  target_og: 0,
+  volume: { value: 0, unit: '' },
+}
+
 const VolumeModel = types.model({
   value: types.number,
   unit: types.string
 })
 
-const Beer = types.model({
+const BeerModel = types.model({
   id: types.number,
   name: types.string,
   tagline: types.string,
@@ -25,8 +47,8 @@ const Beer = types.model({
   target_fg: types.number,
   target_og: types.number,
   volume: VolumeModel,
-})
+});
 
-export default Beer;
+export default BeerModel;
 
-export interface IBeer extends Instance<typeof Beer> {}
+export interface IBeer extends Instance<typeof BeerModel> {}

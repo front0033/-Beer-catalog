@@ -1,13 +1,16 @@
-.container {
+.main-page_container {
   width: 100%;
   padding: 20px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
 }
 
-.beer-list__col {
+.main-page_beer-list_col {
   padding: 8px;
 }
 
-.beer-img {
-  height: 170px;
-  width: 50px;
+.main-page_search_container {
+  width: 70%;
 }
