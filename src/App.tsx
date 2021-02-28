@@ -11,6 +11,7 @@ import {
 } from 'react-router-dom';
 import MainPage from 'pages/main';
 import routes from "routes";
+import BeerCart from "pages/cart";
 
 export default function App() {
   return (
@@ -25,6 +26,9 @@ export default function App() {
               </Route>
               <Route path={routes.details()}>
                 <BeerDetails />
+              </Route>
+              <Route path={routes.cart()}>
+                <BeerCart />
               </Route>
             </Switch>
           </Router>

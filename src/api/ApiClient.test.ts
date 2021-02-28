@@ -1,4 +1,4 @@
-import { ApiErrorsStore } from 'models/ApiErrors';
+import { ApiErrorsStore } from 'store';
 import { getErrorText, onFulfilled, onRejected, statusErrors } from './ApiClient';
 
 jest.mock('models/ApiErrors', () => ({

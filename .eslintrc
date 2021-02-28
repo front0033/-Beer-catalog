@@ -1,6 +1,7 @@
 {
   "extends": [
-    "react-app"
+    "react-app",
+    "prettier"
   ],
   "rules": {
     "react/jsx-curly-newline": "off"
