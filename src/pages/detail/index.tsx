@@ -35,18 +35,23 @@ const BeerDetails: React.FC<{}> = () => {
 
   const removeItem = () => {
     CartStore.removeItem(item);
+    item.setCount(1);
   }
 
   return (
     // eslint-disable-next-line react/jsx-key
     <Card title={item.name} actions={[<StarOutlined />]}>
-
-      <div className="details-container">
+      <div className="bread-crumb">
         <Breadcrumb>
           <Breadcrumb.Item key="home">
-            <Link to="/">Catalog</Link>
+            <Link to={routes.main()}>Catalog</Link>
+          </Breadcrumb.Item>
+          <Breadcrumb.Item key={id}>
+            <Link to={routes.details(id)}>{item.name}</Link>
           </Breadcrumb.Item>
         </Breadcrumb>
+      </div>
+      <div className="details-container">
         <img className="details-beer-img" src={item.image_url} alt={item.name}/>
         <div>
           <Descriptions className="beer-card_description" title="Details" size="middle" column={2}>

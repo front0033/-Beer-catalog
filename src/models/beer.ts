@@ -47,6 +47,7 @@ const BeerModel = types.model({
   target_fg: types.number,
   target_og: types.number,
   volume: VolumeModel,
+  // selectedCount - select for Cart
   selectedCount: types.optional(types.number, 1),
 }).actions((self) => ({  
   setCount(count: number) {
