@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Button, Card, Descriptions, Typography } from 'antd';
+import { Breadcrumb, Button, Card, Descriptions, Typography } from 'antd';
 import { DeleteOutlined, MinusOutlined, PlusCircleOutlined, PlusOutlined, ShoppingCartOutlined, StarOutlined } from '@ant-design/icons';
 import { Link, useParams } from 'react-router-dom';
 import { observer } from 'mobx-react';
@@ -40,7 +40,13 @@ const BeerDetails: React.FC<{}> = () => {
   return (
     // eslint-disable-next-line react/jsx-key
     <Card title={item.name} actions={[<StarOutlined />]}>
+
       <div className="details-container">
+        <Breadcrumb>
+          <Breadcrumb.Item key="home">
+            <Link to="/">Catalog</Link>
+          </Breadcrumb.Item>
+        </Breadcrumb>
         <img className="details-beer-img" src={item.image_url} alt={item.name}/>
         <div>
           <Descriptions className="beer-card_description" title="Details" size="middle" column={2}>
@@ -63,7 +69,7 @@ const BeerDetails: React.FC<{}> = () => {
             ) : (
               <Button className="actions-container_item" icon={<PlusCircleOutlined />} onClick={addItemToCard}>Add to Card</Button>
             )}
-            <Link to={routes.cart()}><Button className="actions-container_item" icon={<ShoppingCartOutlined/>} >Go to Cart</Button></Link>
+            <Link to={routes.cart() + CartStore.generateParamsToCart()}><Button className="actions-container_item" icon={<ShoppingCartOutlined/>} >Go to Cart</Button></Link>
           </div>
         </div>
 

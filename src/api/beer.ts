@@ -29,7 +29,8 @@ interface IBeerDTO {
 const beerApi = {
   get: () => ApiClient.get<{data: IBeerDTO[]}>(`/beers`),
   getById: (id: string) => ApiClient.get<{data: IBeerDTO}>(`/beers/${id}`),
-  getByIds: (ids: string[]) => ApiClient.get<{data: IBeerDTO}>(`/beers/?ids=${ids}`),
+  /** ids most be type: 1|2|3|4 */
+  getByIds: (ids: string) => ApiClient.get<{data: IBeerDTO}>(`/beers/`, {params: {ids}}),
 };
 
 export default beerApi;

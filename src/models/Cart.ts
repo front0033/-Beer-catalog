@@ -25,7 +25,8 @@ const Cart = types.compose(BaseModel, CartModel).named('Cart').views((self) => (
     self.items.replace([...self.items.toJSON()].filter((product) => product.id !== item.id));
   }
 
-  const loadByIds = flow(function* loadById(ids: string[]) {
+  /** ids most be type: 1|2|3|4 */
+  const loadByIds = flow(function* loadById(ids: string) {
     try {
       const { data } = yield beerApi.getByIds(ids);
       applySnapshot(self.items, data);
@@ -34,7 +35,17 @@ const Cart = types.compose(BaseModel, CartModel).named('Cart').views((self) => (
     }
   })
 
-  return {addProduct, isExistProduct, removeItem,  loadByIds}
+  const generateParamsToCart = () => {
+    let params = '';
+
+    self.items.forEach((item, i) => {
+      params += `${i ? '&' : '?'}${item.id}=${item.selectedCount}`;
+    })
+
+    return params;
+  }
+
+  return {addProduct, isExistProduct, removeItem,  loadByIds, generateParamsToCart}
 });
 
 export default Cart;
