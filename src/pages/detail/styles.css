@@ -18,3 +18,13 @@
 .food-span {
   padding-left: 8px;
 }
+
+.actions-container {
+  padding-left: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.actions-container_item {
+  margin-left: 32px;
+}

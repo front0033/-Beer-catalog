@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import * as React from 'react';
 
 import { Card, Skeleton } from 'antd';
@@ -14,8 +15,7 @@ interface IBeerCardProps {
 
 const { Meta } = Card;
 
-const BeerCard: React.FC<IBeerCardProps> = ({data}) => {
-  return (
+const BeerCard: React.FC<IBeerCardProps> = ({data}) => (
     <Card title={data.name} actions={[
       <StarOutlined />,
       <PlusCircleOutlined />,
@@ -30,6 +30,5 @@ const BeerCard: React.FC<IBeerCardProps> = ({data}) => {
       </Skeleton>
     </Card>
   )
-}
 
 export default React.memo(BeerCard);

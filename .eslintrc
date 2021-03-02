@@ -1,7 +1,9 @@
 {
   "extends": [
     "react-app",
-    "prettier"
+    "airbnb-typescript",
+    "prettier",
+    "plugin:react/recommended"
   ],
   "rules": {
     "react/jsx-curly-newline": "off"

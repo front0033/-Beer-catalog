@@ -1,12 +1,12 @@
 import * as React from 'react';
 
+import Search from 'antd/lib/input/Search';
+import { Col, Row } from 'antd';
 import { observer } from 'mobx-react';
+import { BeerCollectionStore } from 'store';
+
 import BeerCard from './Card/Card';
 import './styles.css';
-
-import { Col, Row } from 'antd';
-import { BeerCollectionStore } from 'store';
-import Search from 'antd/lib/input/Search';
 
 const MainPage = () => {
   React.useEffect(() => {

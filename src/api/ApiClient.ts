@@ -1,5 +1,7 @@
 import axios from 'axios';
+// eslint-disable-next-line import/no-cycle
 import { ApiErrorsStore } from 'store';
+
 type IStatusErrors = {
   [key in string | number]: string;
 };
