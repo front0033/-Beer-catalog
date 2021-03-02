@@ -6,12 +6,10 @@ import { Link, useParams } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import { initialBeer } from 'models/Beer';
 import BeerDetail from 'models/BeerDetail';
-import { CartItem } from 'models/Cart';
 import { CartStore } from 'store';
 
 import './styles.css';
 import routes from 'routes';
-
 
 const BeerDetails: React.FC<{}> = () => {
   const { id } = useParams<{id: string}>();
@@ -32,12 +30,11 @@ const BeerDetails: React.FC<{}> = () => {
   };
 
   const addItemToCard = () => {
-    const product = CartItem.create({id: item.id, count: item.selectedCount})
-    CartStore.addProduct(product);
+    CartStore.addProduct(item);
   }
 
   const removeItem = () => {
-    CartStore.removeItem(item.id);
+    CartStore.removeItem(item);
   }
 
   return (

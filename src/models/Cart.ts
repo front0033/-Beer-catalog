@@ -1,15 +1,11 @@
-import { types, Instance } from 'mobx-state-tree';
+import beerApi from 'api/beer';
+import { types, flow, applySnapshot, getSnapshot } from 'mobx-state-tree';
+import { ApiErrorsStore } from 'store';
 import BaseModel from './Base';
-
-export const CartItem = types.model({
-  id: types.number,
-  count: types.number,
-});
-
-interface ICartItem extends Instance<typeof CartItem> {}
+import BeerModel, { IBeer } from './Beer';
 
 const CartModel = types.model({
-  items: types.array(CartItem),
+  items: types.array(BeerModel),
   totalPrice: types.maybeNull(types.number),
   address: types.maybeNull(types.string),
 });
@@ -21,22 +17,24 @@ const Cart = types.compose(BaseModel, CartModel).named('Cart').views((self) => (
 })).actions((self) => {
   const isExistProduct = (id: number): boolean =>!!self.items.toJSON().find((product) => product.id === id);
 
-  const addProduct = (item: ICartItem) => {
-    if (isExistProduct(item.id)) {
-      self.items.replace([...self.items.toJSON()].map((product) => product.id === item.id ? item : product));
-    } else {
-      self.items.push(item);
+  const addProduct = (item: IBeer) => {
+    self.items.push(getSnapshot(item));
+  }
+
+  const removeItem = (item: IBeer) => {
+    self.items.replace([...self.items.toJSON()].filter((product) => product.id !== item.id));
+  }
+
+  const loadByIds = flow(function* loadById(ids: string[]) {
+    try {
+      const { data } = yield beerApi.getByIds(ids);
+      applySnapshot(self.items, data);
+    } catch (e) {
+      ApiErrorsStore.addError(e)
     }
-  }
+  })
 
-  const removeItem = (id: number) => {
-    self.items.replace([...self.items.toJSON()].filter((product) => product.id !== id));
-  }
-
-
-  return {addProduct, isExistProduct, removeItem}
+  return {addProduct, isExistProduct, removeItem,  loadByIds}
 });
 
 export default Cart;
-
-export interface IBeer extends Instance<typeof Cart> {}

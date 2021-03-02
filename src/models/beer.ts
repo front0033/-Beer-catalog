@@ -47,7 +47,12 @@ const BeerModel = types.model({
   target_fg: types.number,
   target_og: types.number,
   volume: VolumeModel,
-});
+}).volatile(() => ({
+  selectedCount: 1
+})).actions((self) => ({  setCount(count: number) {
+  // eslint-disable-next-line no-param-reassign
+  self.selectedCount = count || 1;
+}}));
 
 export default BeerModel;
 
