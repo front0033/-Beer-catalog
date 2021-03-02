@@ -14,3 +14,7 @@
   overflow: hidden;
   text-align: justify;
 }
+
+.ant-btn-icon-only.beer_add-to-cart {
+  width: 70px;
+}
