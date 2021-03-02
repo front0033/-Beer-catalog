@@ -13,10 +13,12 @@ import MainPage from 'pages/main';
 import routes from "routes";
 import BeerCart from "pages/cart";
 
+import './App.css';
+
 export default function App() {
   return (
     <Layout>
-      <Header className="header">Beer Catalog</Header>
+      <Header className="header">Beans Love Beers</Header>
       <Layout>
         <Content>
           <Router>

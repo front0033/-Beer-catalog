@@ -1,3 +1,6 @@
-.header {
+.ant-layout-header.header {
   color: white;
+  font-size: 30px;
+  background-color: #1de9b6;
+  padding: 0 25px;
 }
