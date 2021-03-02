@@ -7,6 +7,14 @@
   align-items: center;
 }
 
+.main-page_header {
+  display: flex;
+  white-space: nowrap;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0 8px;
+}
+
 .main-page_beer-list_col {
   padding: 8px;
 }

@@ -1,13 +1,14 @@
 /* eslint-disable react/jsx-key */
 import * as React from 'react';
 
-import { Card, Skeleton } from 'antd';
+import { Button, Card, Skeleton } from 'antd';
 import { PlusCircleOutlined, StarOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import routes from 'routes';
 
 import './styles.css';
 import { IBeer } from 'models/Beer';
+import { CartStore } from 'store';
 
 interface IBeerCardProps {
   data: IBeer;
@@ -15,11 +16,15 @@ interface IBeerCardProps {
 
 const { Meta } = Card;
 
-const BeerCard: React.FC<IBeerCardProps> = ({data}) => (
+const BeerCard: React.FC<IBeerCardProps> = ({data}) => {
+  const addItemToCard = () => {
+    CartStore.addProduct(data);
+  }
+  return(
     <Card title={data.name} actions={[
-      <StarOutlined />,
-      <PlusCircleOutlined />,
-      <Link to={routes.details(String(data.id))}>Details...</Link>
+      <Button icon={<StarOutlined />}>Add to Favorites</Button>,
+      <Button onClick={addItemToCard} icon={<PlusCircleOutlined />}>Add to Cart</Button>,
+      <Link to={routes.details(String(data.id))}><Button>Details...</Button></Link>
       ]}>
       <Skeleton loading={!data} avatar active>
         <Meta
@@ -29,6 +34,6 @@ const BeerCard: React.FC<IBeerCardProps> = ({data}) => (
         />
       </Skeleton>
     </Card>
-  )
+  )}
 
 export default React.memo(BeerCard);

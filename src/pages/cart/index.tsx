@@ -1,4 +1,4 @@
-import { Breadcrumb, Card, Descriptions, Typography } from 'antd';
+import { Breadcrumb, Card, Descriptions } from 'antd';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 import { Link, useLocation } from 'react-router-dom';
