@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { types, Instance } from 'mobx-state-tree';
 
 export const initialBeer = {
@@ -51,9 +52,15 @@ const BeerModel = types.model({
   selectedCount: types.optional(types.number, 1),
 }).actions((self) => ({  
   setCount(count: number) {
-  // eslint-disable-next-line no-param-reassign
-  self.selectedCount = count || 1;
-}}));
+    self.selectedCount = count || 1;
+  },
+  incrementCount() {
+    self.selectedCount += 1;
+  },
+  decrementCount() {
+    self.selectedCount -= 1;
+  },
+}));
 
 export default BeerModel;
 

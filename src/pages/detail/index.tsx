@@ -4,12 +4,13 @@ import { Breadcrumb, Button, Card, Descriptions, Typography } from 'antd';
 import { DeleteOutlined, MinusOutlined, PlusCircleOutlined, PlusOutlined, ShoppingCartOutlined, StarOutlined } from '@ant-design/icons';
 import { Link, useParams } from 'react-router-dom';
 import { observer } from 'mobx-react';
-import { initialBeer } from 'models/Beer';
 import BeerDetail from 'models/BeerDetail';
 import { CartStore } from 'store';
+import { initialBeer } from 'models/Beer';
 
 import './styles.css';
 import routes from 'routes';
+
 
 const BeerDetails: React.FC<{}> = () => {
   const { id } = useParams<{id: string}>();
@@ -23,10 +24,10 @@ const BeerDetails: React.FC<{}> = () => {
   }, [id]);
 
   const countPlusClick = () => {
-    item.setCount(item.selectedCount + 1);
+    item.incrementCount();
   };
   const countMinusClick = () => {
-    item.setCount(item.selectedCount - 1);
+    item.decrementCount();
   };
 
   const addItemToCard = () => {
@@ -69,7 +70,7 @@ const BeerDetails: React.FC<{}> = () => {
           <div className="actions-container">
             <Button icon={<PlusOutlined />} onClick={countPlusClick} /><Button icon={<MinusOutlined />} onClick={countMinusClick} />
             <Typography className="actions-container_item">{item.selectedCount}</Typography>
-            {!!CartStore.count && CartStore.isExistProduct(item.id) ? (
+            {!!CartStore.count && !!CartStore.getCurrentProduct(item.id) ? (
               <Button className="actions-container_item" icon={<DeleteOutlined />} onClick={removeItem}>Remove from Card</Button>
             ) : (
               <Button className="actions-container_item" icon={<PlusCircleOutlined />} onClick={addItemToCard}>Add to Card</Button>

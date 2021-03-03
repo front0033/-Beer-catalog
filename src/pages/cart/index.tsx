@@ -1,4 +1,4 @@
-import { Breadcrumb, Card, Descriptions } from 'antd';
+import { Alert, Breadcrumb, Card, Descriptions } from 'antd';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -11,7 +11,7 @@ const BeerCart: React.FC<{}> = () => {
   const { search } = useLocation();
 
   React.useEffect(() => {
-    const queryArray = search.split('?')[1].split('&');
+    const queryArray = search && search.split('?')[1].split('&') || [];
 
     let ids: string = '';
     const counts: number[]  = []
@@ -40,6 +40,7 @@ const BeerCart: React.FC<{}> = () => {
           </Breadcrumb.Item>
         </Breadcrumb>
       </div>
+      {!CartStore.items.toJSON().length && <Alert message="Empty Cart" type="info" />}
       {CartStore.items.map((item, i) => (
         <div key={item.id} className="card_item-container">
           <img className="cart-beer-img" src={item.image_url} alt={item.name}/>

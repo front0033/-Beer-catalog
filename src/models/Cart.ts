@@ -15,10 +15,15 @@ const Cart = types.compose(BaseModel, CartModel).named('Cart').views((self) => (
     return self.items.toJSON().length;
   }
 })).actions((self) => {
-  const isExistProduct = (id: number): boolean =>!!self.items.toJSON().find((product) => product.id === id);
+  const getCurrentProduct = (id: number) => self.items.toJSON().find((product) => product.id === id);
 
   const addProduct = (item: IBeer) => {
-    self.items.push(getSnapshot(item));
+    const currentProduct = getCurrentProduct(item.id);
+    if (currentProduct) {
+      currentProduct.incrementCount();
+    } else {
+      self.items.push(getSnapshot(item));
+    }
   }
 
   const removeItem = (item: IBeer) => {
@@ -45,7 +50,7 @@ const Cart = types.compose(BaseModel, CartModel).named('Cart').views((self) => (
     return params;
   }
 
-  return {addProduct, isExistProduct, removeItem,  loadByIds, generateParamsToCart}
+  return {addProduct, getCurrentProduct, removeItem,  loadByIds, generateParamsToCart}
 });
 
 export default Cart;
