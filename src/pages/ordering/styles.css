@@ -1,0 +1,12 @@
+.beer-cart .ant-input-group-addon {
+  width: 130px;
+}
+
+.delivery-information {
+  margin-top: 24px;
+}
+
+.order-field {
+  max-width: 400px;
+  margin-bottom: 16px;
+}

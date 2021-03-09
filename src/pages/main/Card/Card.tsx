@@ -20,6 +20,7 @@ const BeerCard: React.FC<IBeerCardProps> = ({data}) => {
   const addItemToCard = () => {
     CartStore.addProduct(data);
   }
+
   return(
     <Card title={data.name} actions={[
       <Button icon={<StarOutlined />} />,

@@ -3,6 +3,7 @@ import React from "react";
 import { Layout } from "antd";
 import { Header, Content, Footer } from "antd/lib/layout/layout";
 import BeerDetails from 'pages/detail';
+import Ordering from 'pages/ordering';
 
 import {
   BrowserRouter as Router,
@@ -31,6 +32,9 @@ export default function App() {
               </Route>
               <Route path={routes.cart()}>
                 <BeerCart />
+              </Route>
+              <Route path={routes.order()}>
+                <Ordering />
               </Route>
             </Switch>
           </Router>

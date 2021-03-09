@@ -1,4 +1,4 @@
-import { Alert, Breadcrumb, Card, Descriptions } from 'antd';
+import { Alert, Breadcrumb, Button, Card, Descriptions, Input, Typography } from 'antd';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -29,7 +29,7 @@ const BeerCart: React.FC<{}> = () => {
   }, [search]);
 
   return (
-    <Card title="Cart">
+    <Card title="Cart" className="beer-cart">
       <div className="bread-crumb">
         <Breadcrumb>
           <Breadcrumb.Item key="home">
@@ -42,18 +42,28 @@ const BeerCart: React.FC<{}> = () => {
       </div>
       {!CartStore.items.toJSON().length && <Alert message="Empty Cart" type="info" />}
       {CartStore.items.map((item, i) => (
-        <div key={item.id} className="card_item-container">
-          <img className="cart-beer-img" src={item.image_url} alt={item.name}/>
-          <Descriptions className="cart_item_description" title={`${i + 1}. ${item.name}`} size="middle" column={2}>
-            <Descriptions.Item label="Description" span={2}>
-              {item.description}
-            </Descriptions.Item>
-            <Descriptions.Item label="count">
-              {item.selectedCount}
-            </Descriptions.Item>
-          </Descriptions>
-        </div>
+        <React.Fragment key={item.id}>
+          <div  className="card_item-container">
+            <img className="cart-beer-img" src={item.image_url} alt={item.name}/>
+            <Descriptions className="cart_item_description" title={`${i + 1}. ${item.name}`} size="middle" column={2}>
+              <Descriptions.Item label="Description" span={2}>
+                {item.description}
+              </Descriptions.Item>
+              <Descriptions.Item label="count">
+                {item.selectedCount}
+              </Descriptions.Item>
+              <Descriptions.Item label="price">
+                3.50 $
+              </Descriptions.Item>
+            </Descriptions>
+          </div>
+        </React.Fragment>
       ))}
+      {CartStore.items.toString().length && (
+        <div className="cart_button-container">
+          <Link to={routes.order()}><Button type="primary">Go to ordering</Button></Link>
+        </div>
+      )}
     </Card>
   )
 }
