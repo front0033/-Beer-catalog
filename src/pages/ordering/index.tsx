@@ -1,7 +1,7 @@
 import { Alert, Breadcrumb, Card, Input, Typography } from 'antd';
 import { observer } from 'mobx-react';
 import * as React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import routes from 'routes';
 import { CartStore } from 'store';
 
@@ -9,10 +9,7 @@ import './styles.css';
 
 const { Title } = Typography;
 
-const Ordering: React.FC<{}> = () => {
-  const { search } = useLocation();
-
-  return (
+const Ordering: React.FC<{}> = () => (
     <Card title="Ordering" className="beer-order">
       <div className="bread-crumb">
         <Breadcrumb>
@@ -44,6 +41,5 @@ const Ordering: React.FC<{}> = () => {
       )}
     </Card>
   )
-}
 
 export default observer(Ordering);
