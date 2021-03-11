@@ -1,4 +1,4 @@
-import { Alert, Breadcrumb, Card, Input, Typography } from 'antd';
+import { Alert, Breadcrumb, Button, Card, Input, Typography } from 'antd';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
@@ -23,21 +23,44 @@ const Ordering: React.FC<{}> = () => (
       </div>
       {!CartStore.items.toJSON().length && <Alert message="Products not found" type="info" />}
       {CartStore.items.toJSON().length && (
-        <div className="delivery-information">
-          <Title level={4}>Delivery info</Title>
-          <div className="order-field">
-            <Input addonBefore="City/Town" placeholder="Prague" />
+        <>
+          <div className="delivery-information">
+            <Title level={4}>Delivery info</Title>
+            <div className="order-field">
+              <Input addonBefore="City/Town" placeholder="Prague" />
+            </div>
+            <div className="order-field">
+              <Input addonBefore="Street" placeholder="Parizhska" />
+            </div>
+            <div className="order-field">
+              <Input addonBefore="House number" placeholder="1" />
+            </div>
+            <div className="order-field">
+              <Input addonBefore="item" placeholder="1" />
+            </div>
           </div>
-          <div className="order-field">
-            <Input addonBefore="Street" placeholder="Parizhska" />
+          <div className="contact-information">
+            <Title level={4}>Contact info</Title>
+            <div className="order-field">
+              <Input addonBefore="Name"/>
+            </div>
+            <div className="order-field">
+              <Input addonBefore="Email" placeholder="example@gmai.com" />
+            </div>
+            <div className="order-field">
+              <Input addonBefore="Phone" placeholder="+7-999-000-00-00" />
+            </div>
           </div>
-          <div className="order-field">
-            <Input addonBefore="House number" placeholder="1" />
+          <div className="contact-information">
+            <Title level={4}>Payment info</Title>
+            <div className="order-field">
+              <Input addonBefore="card numder" placeholder="example@gmai.com" />
+            </div>
           </div>
-          <div className="order-field">
-            <Input addonBefore="item" placeholder="1" />
+          <div className="cart_button-container">
+            <Link to={routes.order()}><Button type="primary">Buy $$$</Button></Link>
           </div>
-        </div>
+        </>
       )}
     </Card>
   )

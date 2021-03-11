@@ -59,7 +59,7 @@ const BeerCart: React.FC<{}> = () => {
           </div>
         </React.Fragment>
       ))}
-      {CartStore.items.toString().length && (
+      {CartStore.items.toJSON().length && (
         <div className="cart_button-container">
           <Link to={routes.order()}><Button type="primary">Go to ordering</Button></Link>
         </div>
