@@ -1,8 +1,8 @@
 /* eslint-disable import/no-named-as-default */
-import BeerCollection from "models/BeerColection";
-import ApiErrors from "models/ApiErrors";
+import BeerCollection from 'models/BeerColection';
+import ApiErrors from 'models/ApiErrors';
 import Cart from 'models/Cart';
 
-export const BeerCollectionStore = BeerCollection.create({items: []});
+export const BeerCollectionStore = BeerCollection.create({ items: [] });
 export const ApiErrorsStore = ApiErrors.create({ errors: [] });
-export const CartStore = Cart.create({items: []});
+export const CartStore = Cart.create({ items: [] });

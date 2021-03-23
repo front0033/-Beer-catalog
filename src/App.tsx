@@ -1,18 +1,14 @@
-import React from "react";
+import React from 'react';
 
-import { Layout } from "antd";
-import { Header, Content, Footer } from "antd/lib/layout/layout";
+import { Layout } from 'antd';
+import { Header, Content, Footer } from 'antd/lib/layout/layout';
 import BeerDetails from 'pages/detail';
 import Ordering from 'pages/ordering';
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import MainPage from 'pages/main';
-import routes from "routes";
-import BeerCart from "pages/cart";
+import routes from 'routes';
+import BeerCart from 'pages/cart';
 
 import './App.css';
 

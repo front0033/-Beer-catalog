@@ -5,8 +5,10 @@
     "prettier",
     "plugin:react/recommended"
   ],
+  "plugins": ["prettier"],
   "rules": {
-    "react/jsx-curly-newline": "off"
+    "react/jsx-curly-newline": "off",
+    "prettier/prettier": ["error"]
   },
   "overrides": [
     {
