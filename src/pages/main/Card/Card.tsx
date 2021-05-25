@@ -9,6 +9,7 @@ import routes from 'routes';
 import './styles.css';
 import { IBeer } from 'models/Beer';
 import { CartStore } from 'store';
+import { observer } from 'mobx-react';
 
 interface IBeerCardProps {
   data: IBeer;
@@ -40,7 +41,7 @@ const BeerCard: React.FC<IBeerCardProps> = ({ data }) => {
             </>
           }
         />,
-        <Link to={routes.cart() + CartStore.generateParamsToCart()}>
+        <Link to={routes.cart() + CartStore.paramsToCart}>
           <Button className="actions-container_item" icon={<ShoppingCartOutlined />} />
         </Link>,
       ]}
@@ -56,4 +57,4 @@ const BeerCard: React.FC<IBeerCardProps> = ({ data }) => {
   );
 };
 
-export default React.memo(BeerCard);
+export default observer(BeerCard);

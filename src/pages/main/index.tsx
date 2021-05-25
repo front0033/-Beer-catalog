@@ -23,7 +23,7 @@ const MainPage = () => {
           <Search placeholder="please input text" enterButton="Search" size="large" />
         </div>
         {!!CartStore.items.toJSON().length && (
-          <Link to={routes.cart() + CartStore.generateParamsToCart()}>
+          <Link to={routes.cart() + CartStore.paramsToCart}>
             <Button className="actions-container_item" icon={<ShoppingCartOutlined />}>
               In Cart {CartStore.items.toJSON().length} items
             </Button>

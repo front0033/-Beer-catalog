@@ -95,7 +95,7 @@ const BeerDetails: React.FC<{}> = () => {
                 Add to Card
               </Button>
             )}
-            <Link to={routes.cart() + CartStore.generateParamsToCart()}>
+            <Link to={routes.cart() + CartStore.paramsToCart}>
               <Button className="actions-container_item" icon={<ShoppingCartOutlined />}>
                 Go to Cart
               </Button>

@@ -17,6 +17,14 @@ const Cart = types
     get count() {
       return self.items.toJSON().length;
     },
+    get paramsToCart() {
+      let params = '';
+      self.items.forEach((item, i) => {
+        params += `${i ? '&' : '?'}${item.id}=${item.selectedCount}`;
+      });
+
+      return params;
+    },
   }))
   .actions((self) => {
     const getCurrentProduct = (id: number) => self.items.toJSON().find((product) => product.id === id);
@@ -44,17 +52,7 @@ const Cart = types
       }
     });
 
-    const generateParamsToCart = () => {
-      let params = '';
-
-      self.items.forEach((item, i) => {
-        params += `${i ? '&' : '?'}${item.id}=${item.selectedCount}`;
-      });
-
-      return params;
-    };
-
-    return { addProduct, getCurrentProduct, removeItem, loadByIds, generateParamsToCart };
+    return { addProduct, getCurrentProduct, removeItem, loadByIds };
   });
 
 export default Cart;
