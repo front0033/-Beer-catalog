@@ -19,6 +19,9 @@
   padding: 8px;
 }
 
+.main-page_container .ant-row {
+  width: 100%;
+}
 .main-page_search_container {
   width: 70%;
 }

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import Search from 'antd/lib/input/Search';
-import { Button, Col, Row } from 'antd';
+import { Button, Card, Col, Row, Skeleton } from 'antd';
 import { observer } from 'mobx-react';
 import { BeerCollectionStore, CartStore } from 'store';
 import { ShoppingCartOutlined } from '@ant-design/icons';
@@ -31,11 +31,21 @@ const MainPage = () => {
         )}
       </div>
       <Row>
-        {BeerCollectionStore.items.toJSON().map((beer) => (
-          <Col key={beer.id} className="main-page_beer-list_col" span={8}>
-            <BeerCard data={beer} />
-          </Col>
-        ))}
+        {BeerCollectionStore.dataPending &&
+          new Array(12).fill({}).map((item, i) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <Col key={i} className="main-page_beer-list_col" span={8}>
+              <Card>
+                <Skeleton loading avatar active />
+              </Card>
+            </Col>
+          ))}
+        {BeerCollectionStore.dataLoadSuccess &&
+          BeerCollectionStore.items.toJSON().map((beer) => (
+            <Col key={beer.id} className="main-page_beer-list_col" span={8}>
+              <BeerCard data={beer} />
+            </Col>
+          ))}
       </Row>
     </div>
   );

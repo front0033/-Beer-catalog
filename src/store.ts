@@ -1,5 +1,5 @@
 /* eslint-disable import/no-named-as-default */
-import BeerCollection from 'models/BeerColection';
+import BeerCollection from 'models/BeerCollection';
 import ApiErrors from 'models/ApiErrors';
 import Cart from 'models/Cart';
 
