@@ -5,13 +5,18 @@ import { Button, Card, Col, Row, Skeleton } from 'antd';
 import { observer } from 'mobx-react';
 import { BeerCollectionStore, CartStore } from 'store';
 import { ShoppingCartOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import routes from 'routes';
+import useLoadPruductByQueryUrl from 'hooks/loadPruductByQueryUrl';
 
 import BeerCard from './Card/Card';
 import './styles.css';
 
 const MainPage = () => {
+  const { search } = useLocation();
+
+  useLoadPruductByQueryUrl(search);
+
   React.useEffect(() => {
     BeerCollectionStore.loadAll();
   }, []);

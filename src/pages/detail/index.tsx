@@ -51,7 +51,7 @@ const BeerDetails: React.FC<{}> = () => {
       <div className="bread-crumb">
         <Breadcrumb>
           <Breadcrumb.Item key="home">
-            <Link to={routes.main()}>Catalog</Link>
+            <Link to={routes.main() + CartStore.paramsToCart}>Catalog</Link>
           </Breadcrumb.Item>
           <Breadcrumb.Item key={id}>
             <Link to={routes.details(id)}>{item.name}</Link>

@@ -21,7 +21,7 @@ const BeerCart: React.FC<{}> = () => {
             <Link to={routes.main()}>Catalog</Link>
           </Breadcrumb.Item>
           <Breadcrumb.Item key="cart">
-            <Link to={routes.cart()}>Cart</Link>
+            <Link to={routes.cart() + CartStore.paramsToCart}>Cart</Link>
           </Breadcrumb.Item>
         </Breadcrumb>
       </div>

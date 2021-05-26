@@ -10,6 +10,7 @@ import './styles.css';
 import { CartStore } from 'store';
 import { observer } from 'mobx-react';
 import { IBeer } from 'models/Beer';
+import addIdToUrl from 'utils/addIdToUrl';
 
 interface IBeerCardProps {
   data: IBeer;
@@ -28,19 +29,21 @@ const BeerCard: React.FC<IBeerCardProps> = ({ data }) => {
       actions={[
         <Button icon={<StarOutlined />} />,
 
-        <Link to={routes.details(String(data.id))}>
+        <Link to={routes.details(String(data.id)) + CartStore.paramsToCart}>
           <Button>Details...</Button>
         </Link>,
-        <Button
-          className="beer_add-to-cart"
-          onClick={addItemToCard}
-          icon={
-            <>
-              <PlusCircleOutlined />
-              <ShoppingCartOutlined />
-            </>
-          }
-        />,
+        <Link to={routes.main() + addIdToUrl(CartStore.paramsToCart, data.id.toString())}>
+          <Button
+            className="beer_add-to-cart"
+            onClick={addItemToCard}
+            icon={
+              <>
+                <PlusCircleOutlined />
+                <ShoppingCartOutlined />
+              </>
+            }
+          />
+        </Link>,
         <Link to={routes.cart() + CartStore.paramsToCart}>
           <Button className="actions-container_item" icon={<ShoppingCartOutlined />} />
         </Link>,

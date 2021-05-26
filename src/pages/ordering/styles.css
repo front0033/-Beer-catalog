@@ -1,4 +1,4 @@
-.beer-order .ant-input-group-addon {
+.beer-order .ant-form-item-label > label {
   width: 130px;
   text-align: left;
 }

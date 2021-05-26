@@ -27,10 +27,14 @@ const Ordering: React.FC<{}> = () => {
       <div className="bread-crumb">
         <Breadcrumb>
           <Breadcrumb.Item key="home">
-            <Link to={routes.main()}>Catalog</Link>
+            <Link to={routes.main() + CartStore.paramsToCart}>Catalog</Link>
           </Breadcrumb.Item>
           <Breadcrumb.Item key="cart">
-            <Link to={routes.order()}>Ordering</Link>
+            <Link to={routes.cart() + CartStore.paramsToCart}>
+              {CartStore.items.toJSON().length
+                ? `Selected ${CartStore.items.toJSON().length} products in cart`
+                : 'Empty Cart'}
+            </Link>
           </Breadcrumb.Item>
         </Breadcrumb>
       </div>
@@ -42,42 +46,31 @@ const Ordering: React.FC<{}> = () => {
             <div className="order-field">
               <Form.Item
                 name={OrderFields.city}
-                label="Note"
+                label="City/Town"
                 rules={[{ required: true }]}
                 help={!!item.propertyValidation(OrderFields.city) && 'Неверный формат'}
               >
-                <Input
-                  addonBefore="City/Town"
-                  placeholder="Prague"
-                  value={item.city || ''}
-                  onChange={handleChange(OrderFields.city)}
-                />
+                <Input placeholder="Prague" value={item.city || ''} onChange={handleChange(OrderFields.city)} />
               </Form.Item>
             </div>
             <div className="order-field">
               <Form.Item
                 name={OrderFields.street}
-                label="Note"
+                label="Street"
                 rules={[{ required: true }]}
                 help={!!item.propertyValidation(OrderFields.street) && 'Неверный формат'}
               >
-                <Input
-                  addonBefore="Street"
-                  placeholder="Parizhska"
-                  value={item.street || ''}
-                  onChange={handleChange(OrderFields.street)}
-                />
+                <Input placeholder="Parizhska" value={item.street || ''} onChange={handleChange(OrderFields.street)} />
               </Form.Item>
             </div>
             <div className="order-field">
               <Form.Item
                 name={OrderFields.houseNumber}
-                label="Note"
+                label="House number"
                 rules={[{ required: true }]}
                 help={!!item.propertyValidation(OrderFields.houseNumber) && 'Неверный формат'}
               >
                 <Input
-                  addonBefore="House number"
                   placeholder="1"
                   value={item.houseNumber || ''}
                   onChange={handleChange(OrderFields.houseNumber)}
@@ -90,22 +83,21 @@ const Ordering: React.FC<{}> = () => {
             <div className="order-field">
               <Form.Item
                 name={OrderFields.name}
-                label="Note"
+                label="Name"
                 rules={[{ required: true }]}
                 help={!!item.propertyValidation(OrderFields.name) && 'Неверный формат'}
               >
-                <Input addonBefore="Name" value={item.name || ''} onChange={handleChange(OrderFields.name)} />
+                <Input value={item.name || ''} onChange={handleChange(OrderFields.name)} />
               </Form.Item>
             </div>
             <div className="order-field">
               <Form.Item
                 name={OrderFields.email}
-                label="Note"
+                label="Email"
                 rules={[{ required: true }]}
                 help={!!item.propertyValidation(OrderFields.email) && 'Неверный формат email'}
               >
                 <Input
-                  addonBefore="Email"
                   placeholder="example@gmai.com"
                   value={item.email || ''}
                   onChange={handleChange(OrderFields.email)}
@@ -115,12 +107,11 @@ const Ordering: React.FC<{}> = () => {
             <div className="order-field">
               <Form.Item
                 name={OrderFields.phone}
-                label="Note"
+                label="Phone"
                 rules={[{ required: true }]}
                 help={!!item.propertyValidation(OrderFields.phone) && 'Неверный формат номера телефона'}
               >
                 <Input
-                  addonBefore="Phone"
                   placeholder="+7-999-000-00-00"
                   value={item.phone || ''}
                   onChange={handleChange(OrderFields.phone)}
@@ -133,12 +124,11 @@ const Ordering: React.FC<{}> = () => {
             <div className="order-field">
               <Form.Item
                 name={OrderFields.cardNumber}
-                label="Note"
+                label="card numder"
                 rules={[{ required: true }]}
                 help={!!item.propertyValidation(OrderFields.cardNumber) && 'Неверный формат карты'}
               >
                 <Input
-                  addonBefore="card numder"
                   placeholder="example@gmai.com"
                   value={item.city || ''}
                   onChange={handleChange(OrderFields.cardNumber)}
