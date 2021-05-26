@@ -9,7 +9,7 @@ import {
   ShoppingCartOutlined,
   StarOutlined,
 } from '@ant-design/icons';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import BeerDetail from 'models/BeerDetail';
 import { CartStore } from 'store';
@@ -17,9 +17,11 @@ import { initialBeer } from 'models/Beer';
 
 import './styles.css';
 import routes from 'routes';
+import { addIdToUrl, removeIdFromUrl } from 'utils/queryStringHeplers';
 
 const BeerDetails: React.FC<{}> = () => {
   const { id } = useParams<{ id: string }>();
+  const { search } = useLocation();
   const item = React.useRef(BeerDetail.create({ ...initialBeer })).current;
 
   React.useEffect(() => {
@@ -87,13 +89,17 @@ const BeerDetails: React.FC<{}> = () => {
             <Button icon={<MinusOutlined />} onClick={countMinusClick} />
             <Typography className="actions-container_item">{item.selectedCount}</Typography>
             {!!CartStore.count && !!CartStore.getCurrentProduct(item.id) ? (
-              <Button className="actions-container_item" icon={<DeleteOutlined />} onClick={removeItem}>
-                Remove from Card
-              </Button>
+              <Link to={routes.details(id) + removeIdFromUrl(search, String(id))}>
+                <Button className="actions-container_item" icon={<DeleteOutlined />} onClick={removeItem}>
+                  Remove from Card
+                </Button>
+              </Link>
             ) : (
-              <Button className="actions-container_item" icon={<PlusCircleOutlined />} onClick={addItemToCard}>
-                Add to Card
-              </Button>
+              <Link to={routes.details(id) + addIdToUrl(search, String(id))}>
+                <Button className="actions-container_item" icon={<PlusCircleOutlined />} onClick={addItemToCard}>
+                  Add to Card
+                </Button>
+              </Link>
             )}
             <Link to={routes.cart() + CartStore.paramsToCart}>
               <Button className="actions-container_item" icon={<ShoppingCartOutlined />}>

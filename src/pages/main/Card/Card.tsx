@@ -3,14 +3,14 @@ import * as React from 'react';
 
 import { Button, Card } from 'antd';
 import { PlusCircleOutlined, ShoppingCartOutlined, StarOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import routes from 'routes';
 
 import './styles.css';
 import { CartStore } from 'store';
 import { observer } from 'mobx-react';
 import { IBeer } from 'models/Beer';
-import addIdToUrl from 'utils/addIdToUrl';
+import { addIdToUrl } from 'utils/queryStringHeplers';
 
 interface IBeerCardProps {
   data: IBeer;
@@ -19,6 +19,7 @@ interface IBeerCardProps {
 const { Meta } = Card;
 
 const BeerCard: React.FC<IBeerCardProps> = ({ data }) => {
+  const { search } = useLocation();
   const addItemToCard = () => {
     CartStore.addProduct(data);
   };
@@ -32,7 +33,7 @@ const BeerCard: React.FC<IBeerCardProps> = ({ data }) => {
         <Link to={routes.details(String(data.id)) + CartStore.paramsToCart}>
           <Button>Details...</Button>
         </Link>,
-        <Link to={routes.main() + addIdToUrl(CartStore.paramsToCart, data.id.toString())}>
+        <Link to={routes.main() + addIdToUrl(search, String(data.id))}>
           <Button
             className="beer_add-to-cart"
             onClick={addItemToCard}
