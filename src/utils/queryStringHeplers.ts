@@ -20,7 +20,7 @@ export const addIdToUrl = (search: string, id: string): string => {
         .join('&')}`;
     }
 
-    return `?${search.replace('?', '')}&${id}=1`;
+    return `${search}&${id}=1`;
   }
 
   return '';

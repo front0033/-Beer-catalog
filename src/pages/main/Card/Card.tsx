@@ -39,7 +39,7 @@ const BeerCard: React.FC<IBeerCardProps> = ({ data }) => {
             onClick={addItemToCard}
             icon={
               <>
-                <PlusCircleOutlined />
+                <PlusCircleOutlined /> 1 in
                 <ShoppingCartOutlined />
               </>
             }
