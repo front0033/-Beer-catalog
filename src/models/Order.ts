@@ -16,7 +16,7 @@ export enum OrderFields {
 export const initialValues: Record<OrderFields, any> = {
   [OrderFields.city]: '',
   [OrderFields.street]: '',
-  [OrderFields.houseNumber]: '',
+  [OrderFields.houseNumber]: 0,
   [OrderFields.name]: '',
   [OrderFields.email]: '',
   [OrderFields.phone]: '',
@@ -26,7 +26,7 @@ export const initialValues: Record<OrderFields, any> = {
 const OrderModel = types.model({
   [OrderFields.city]: types.maybeNull(types.string),
   [OrderFields.street]: types.maybeNull(types.string),
-  [OrderFields.houseNumber]: types.maybeNull(types.string),
+  [OrderFields.houseNumber]: types.maybeNull(types.number),
   [OrderFields.name]: types.maybeNull(types.string),
   [OrderFields.email]: types.maybeNull(types.string),
   [OrderFields.phone]: types.maybeNull(types.string),

@@ -1,16 +1,21 @@
 import { Form, Alert, Breadcrumb, Button, Card, Input, Typography } from 'antd';
 import { observer } from 'mobx-react';
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import routes from 'routes';
 import { CartStore } from 'store';
 import Order, { initialValues, OrderFields } from 'models/Order';
 
 import './styles.css';
+import useLoadPruductByQueryUrl from 'hooks/loadPruductByQueryUrl';
 
 const { Title } = Typography;
 
 const Ordering: React.FC<{}> = () => {
+  const { search } = useLocation();
+
+  useLoadPruductByQueryUrl(search);
+
   const item = React.useRef(Order.create(initialValues)).current;
 
   const handleChange = (fieldName: OrderFields): React.ChangeEventHandler<HTMLInputElement> => (e) => {

@@ -1,4 +1,5 @@
 import { Alert, Breadcrumb, Button, Card, Descriptions } from 'antd';
+import useLoadPruductByQueryUrl from 'hooks/loadPruductByQueryUrl';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -10,23 +11,7 @@ import './styles.css';
 const BeerCart: React.FC<{}> = () => {
   const { search } = useLocation();
 
-  React.useEffect(() => {
-    const queryArray = (search && search.split('?')[1].split('&')) || [];
-
-    let ids: string = '';
-    const counts: number[] = [];
-    queryArray.forEach((param, i) => {
-      const [key, value] = param.split('=');
-      ids += `${key}${i < queryArray.length ? '|' : ''}`;
-      counts.push(+value);
-    });
-
-    CartStore.loadByIds(ids).then(() => {
-      CartStore.items.forEach((item, i) => {
-        item.setCount(counts[i]);
-      });
-    });
-  }, [search]);
+  useLoadPruductByQueryUrl(search);
 
   return (
     <Card title="Cart" className="beer-cart">
@@ -57,7 +42,7 @@ const BeerCart: React.FC<{}> = () => {
       ))}
       {CartStore.items.toJSON().length && (
         <div className="cart_button-container">
-          <Link to={routes.order()}>
+          <Link to={routes.order() + CartStore.paramsToCart}>
             <Button type="primary">Go to ordering</Button>
           </Link>
         </div>
