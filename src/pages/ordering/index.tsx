@@ -3,9 +3,8 @@ import { observer } from 'mobx-react';
 import * as React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import routes from 'routes';
-import { CartStore } from 'store';
 import Order, { initialValues, OrderFields } from 'models/Order';
-import { getIdsLength } from 'utils/queryStringHeplers';
+import { countIdsFromUrl } from 'utils/queryStringHeplers';
 
 import './styles.css';
 
@@ -20,7 +19,7 @@ const Ordering: React.FC<{}> = () => {
     item.setField(fieldName, e.target.value);
   };
 
-  const productsLength = getIdsLength(search);
+  const productsLength = countIdsFromUrl(search);
 
   return (
     <Card title="Ordering" className="beer-order">
@@ -36,8 +35,8 @@ const Ordering: React.FC<{}> = () => {
           </Breadcrumb.Item>
         </Breadcrumb>
       </div>
-      {!CartStore.items.toJSON().length && <Alert message="Products not found" type="info" />}
-      {CartStore.items.toJSON().length && (
+      {!productsLength && <Alert message="Products not found" type="info" />}
+      {productsLength && (
         <>
           <div className="delivery-information">
             <Title level={4}>Delivery info</Title>

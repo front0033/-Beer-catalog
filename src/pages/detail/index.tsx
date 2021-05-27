@@ -12,7 +12,6 @@ import {
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import BeerDetail from 'models/BeerDetail';
-import { CartStore } from 'store';
 import { initialBeer } from 'models/Beer';
 
 import './styles.css';

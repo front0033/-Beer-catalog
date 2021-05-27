@@ -36,7 +36,7 @@ export const decrementCountFromIdFromUrl = (search: string, id: string): string 
       .map((item) => {
         const [currentId, currentCount] = item.split('=');
         if (currentId === id) {
-          return `${currentId}=${+currentCount - 1}`;
+          return `${currentId}=${+currentCount === 1 ? 1 : +currentCount - 1}`;
         }
 
         return item;
@@ -69,8 +69,6 @@ export const isExistIdFromUrl = (search: string, id: string): boolean =>
     .map((item) => item.split('='))
     .find((item) => item[0] === id);
 
-export const getIdsLength = (search: string): number => search.replace('?', '').split('&').length;
-
 export const countByIdFromUrl = (search: string, id: string): number => {
   const current = search
     .replace('?', '')
@@ -80,3 +78,5 @@ export const countByIdFromUrl = (search: string, id: string): number => {
 
   return current ? +current[1] : 0;
 };
+
+export const countIdsFromUrl = (search: string): number => search.replace('?', '').split('&').length;

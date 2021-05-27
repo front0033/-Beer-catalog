@@ -3,11 +3,11 @@ import * as React from 'react';
 import Search from 'antd/lib/input/Search';
 import { Button, Card, Col, Row, Skeleton } from 'antd';
 import { observer } from 'mobx-react';
-import { BeerCollectionStore, CartStore } from 'store';
+import { BeerCollectionStore } from 'store';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router-dom';
 import routes from 'routes';
-import { getIdsLength } from 'utils/queryStringHeplers';
+import { countIdsFromUrl } from 'utils/queryStringHeplers';
 
 import BeerCard from './Card/Card';
 import './styles.css';
@@ -25,10 +25,10 @@ const MainPage = () => {
         <div className="main-page_search_container">
           <Search placeholder="please input text" enterButton="Search" size="large" />
         </div>
-        {!!CartStore.items.toJSON().length && (
+        {!!countIdsFromUrl(search) && (
           <Link to={routes.cart() + search}>
             <Button className="actions-container_item" icon={<ShoppingCartOutlined />}>
-              In Cart {getIdsLength(search)} items
+              In Cart {countIdsFromUrl(search)} items
             </Button>
           </Link>
         )}

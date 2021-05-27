@@ -7,7 +7,6 @@ import { Link, useLocation } from 'react-router-dom';
 import routes from 'routes';
 
 import './styles.css';
-import { CartStore } from 'store';
 import { observer } from 'mobx-react';
 import { IBeer } from 'models/Beer';
 import { addIdToUrl } from 'utils/queryStringHeplers';
