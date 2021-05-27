@@ -1,24 +1,35 @@
 import React from 'react';
 
 import { Layout } from 'antd';
-import { Header, Content, Footer } from 'antd/lib/layout/layout';
+
+import BeerMenu from 'components/menu';
 import BeerDetails from 'pages/detail';
 import Ordering from 'pages/ordering';
-
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import MainPage from 'pages/main';
+
+import { Switch, Route } from 'react-router-dom';
+
 import routes from 'routes';
 import BeerCart from 'pages/cart';
 
 import './App.css';
 
+const { Header, Content, Footer, Sider } = Layout;
+
 export default function App() {
   return (
     <Layout>
-      <Header className="header">Beans Love Beers</Header>
-      <Layout>
-        <Content>
-          <Router basename={process.env.PUBLIC_URL}>
+      <Header className="header">
+        <div className="logo" />
+        Beans Love Beers
+      </Header>
+      <Content>
+        {/** breabCrumbs */}
+        <Layout className="site-layout-background">
+          <Sider className="site-layout-background" width={200}>
+            <BeerMenu />
+          </Sider>
+          <Content style={{ padding: '0 24px', minHeight: 280 }}>
             <Switch>
               <Route exact path={routes.main()}>
                 <MainPage />
@@ -33,9 +44,9 @@ export default function App() {
                 <Ordering />
               </Route>
             </Switch>
-          </Router>
-        </Content>
-      </Layout>
+          </Content>
+        </Layout>
+      </Content>
       <Footer style={{ textAlign: 'center' }}>Beer Catalog developed by Igor Bezdeneznhykh</Footer>
     </Layout>
   );
