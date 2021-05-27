@@ -23,7 +23,7 @@ const BeerCollection = types
         setTimeout(() => {
           applySnapshot(self.items, data);
           self.setLoadSuccess();
-        }, 2000);
+        }, 400);
       } catch (e) {
         self.setError();
         ApiErrorsStore.addError(e);

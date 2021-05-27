@@ -18,7 +18,7 @@ const BeerDetail = types
         setTimeout(() => {
           applySnapshot(self, data[0]);
           self.setLoadSuccess();
-        }, 2000);
+        }, 400);
       } catch (e) {
         self.setError();
         ApiErrorsStore.addError(e);

@@ -31,7 +31,7 @@ const Cart = types
         setTimeout(() => {
           applySnapshot(self.items, data);
           self.setLoadSuccess();
-        }, 2000);
+        }, 400);
       } catch (e) {
         ApiErrorsStore.addError(e);
         self.setError();
