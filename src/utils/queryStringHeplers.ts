@@ -80,3 +80,10 @@ export const countByIdFromUrl = (search: string, id: string): number => {
 };
 
 export const countIdsFromUrl = (search: string): number => search.replace('?', '').split('&').length;
+
+export const getTotalCount = (search: string) =>
+  search
+    .replace('?', '')
+    .split('&')
+    .map((item) => item.split('='))
+    .reduce((total, count) => total + Number(count[1]), 0);

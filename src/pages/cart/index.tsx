@@ -5,21 +5,22 @@ import * as React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import routes from 'routes';
 import { CartStore } from 'store';
-import { removeIdFromUrl } from 'utils/queryStringHeplers';
+import { countByIdFromUrl, getTotalCount, removeIdFromUrl, countIdsFromUrl } from 'utils/queryStringHeplers';
 
 import './styles.css';
 
 const { Title } = Typography;
 
+const DEFAULT_PRICE = 3.5;
+
 const BeerCart: React.FC<{}> = () => {
   const { search } = useLocation();
 
   useLoadPruductByQueryUrl(search);
-  const defaultPrice = 3.5;
 
-  const totalCount = CartStore.items.toJSON().reduce((total, count) => total + count.selectedCount, 0);
+  const totalCount = getTotalCount(search);
 
-  const productsLength = CartStore.items.toJSON().length;
+  const productsLength = countIdsFromUrl(search);
 
   return (
     <Card title="Cart" className="beer-cart">
@@ -57,8 +58,10 @@ const BeerCart: React.FC<{}> = () => {
                     <Descriptions.Item label="Description" span={2}>
                       {item.description}
                     </Descriptions.Item>
-                    <Descriptions.Item label="count">{item.selectedCount}</Descriptions.Item>
-                    <Descriptions.Item label="price">{defaultPrice * item.selectedCount} $</Descriptions.Item>
+                    <Descriptions.Item label="count">{countByIdFromUrl(search, String(item.id))}</Descriptions.Item>
+                    <Descriptions.Item label="price">
+                      {DEFAULT_PRICE * countByIdFromUrl(search, String(item.id))} $
+                    </Descriptions.Item>
                   </Descriptions>
                   <div className="cart_item_actions">
                     <Link to={routes.details(item.id.toString()) + search}>
@@ -72,7 +75,7 @@ const BeerCart: React.FC<{}> = () => {
               </div>
             </React.Fragment>
           ))}
-          <Title level={4}>TOTAL: {totalCount * defaultPrice} $</Title>
+          <Title level={4}>TOTAL: {totalCount * DEFAULT_PRICE} $</Title>
           {CartStore.items.toJSON().length && (
             <div className="cart_button-container">
               <Link to={routes.order() + search}>
