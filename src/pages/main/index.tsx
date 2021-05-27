@@ -19,11 +19,15 @@ const MainPage = () => {
     BeerCollectionStore.loadByParams();
   }, []);
 
+  const handleSearch = (value: string) => {
+    BeerCollectionStore.loadByParams({ beer_name: value });
+  };
+
   return (
     <div className="main-page_container">
       <div className="main-page_header">
         <div className="main-page_search_container">
-          <Search placeholder="please input text" enterButton="Search" size="large" />
+          <Search placeholder="please input text" enterButton="Search" size="large" onSearch={handleSearch} />
         </div>
         {!!countIdsFromUrl(search) && (
           <Link to={routes.cart() + search}>
