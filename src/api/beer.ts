@@ -25,9 +25,66 @@ interface IBeerDTO {
   target_og: number;
   volume: IVolume;
 }
+/**
+ * ABV - крепость пива
+ * OBU - горчинка
+ * EBC - цвет пива
+ *   6 - 9 EBC: Pale to light blonde, for example Kompaan Kameraad (7 EBC)
+ *   9 - 12 EBC: Blonde - yellow
+ *   12 - 20 EBC: Gold
+ *   20 - 30 EBC: Amber, for example De Koninck APA, (30 EBC)
+ *   30 - 45 EBC: Copper
+ *   45 - 75 EBC: Dark copper / brown
+ *   75 - 120 EBC: Very dark brown, transparent
+ *   > 120 EBC: Black, not transparent, such as De Molen Hel & Verdoemenis (297 EBC)
+ * yeast - дрожжи
+ * hops - хмель
+ * malt - солод
+ */
+
+/**
+ * abv_gt (number) -  Returns all beers with ABV greater than the supplied number
+ * abv_lt (number) - Returns all beers with ABV less than the supplied number
+ * ibu_gt (number) - Returns all beers with IBU greater than the supplied number
+ * ibu_lt (number) - Returns all beers with IBU less than the supplied number
+ * ebc_gt (number) - Returns all beers with EBC greater than the supplied number
+ * ebc_lt (number) - Returns all beers with EBC less than the supplied number
+ * beer_name (string) - Returns all beers matching the supplied name (this will
+ *    match partial strings as well so e.g punk will return Punk IPA),
+ *    if you need to add spaces just add an underscore (_).
+ * yeast (string)  - Returns all beers matching the supplied yeast name, this
+ *    performs a fuzzy match, if you need to add spaces just add an underscore (_).
+ * brewed_before (date) - Returns all beers brewed before this date, the date format is mm-yyyy e.g 10-2011
+ * brewed_after (date) - Returns all beers brewed after this date, the date format is mm-yyyy e.g 10-2011
+ * hops (string) - Returns all beers matching the supplied hops name, this performs a fuzzy match,
+ *    if you need to add spaces just add an underscore (_).
+ * malt (string) - Returns all beers matching the supplied malt name, this performs a
+ *    fuzzy match, if you need to add spaces just add an underscore (_).
+ * food - Returns all beers matching the supplied food string, this performs a fuzzy
+ *    match, if you need to add spaces just add an underscore (_).
+ * ids - Returns all beers matching the supplied ID's. You can pass in multiple ID's
+ *  by separating them with a | symbol.
+ */
+
+interface IBeerListParams {
+  abv_gt?: number;
+  abv_lt?: number;
+  ibu_gt?: number;
+  ibu_lt?: number;
+  ebc_gt?: number;
+  ebc_lt?: number;
+  beer_name?: string;
+  yeast?: string;
+  brewed_before?: string; // example 10-2011
+  brewed_after?: string; // example 10-2011
+  hops?: string;
+  malt?: string;
+  food?: string;
+  ids?: string; // example 1|2|4|7
+}
 
 const beerApi = {
-  get: () => ApiClient.get<{ data: IBeerDTO[] }>(`/beers`),
+  get: (params: IBeerListParams = {}) => ApiClient.get<{ data: IBeerDTO[] }>(`/beers`, { params }),
   getById: (id: string) => ApiClient.get<{ data: IBeerDTO }>(`/beers/${id}`),
   /** ids most be type: 1|2|3|4 */
   getByIds: (ids: string) => ApiClient.get<{ data: IBeerDTO }>(`/beers/`, { params: { ids } }),
