@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/Beer-catalog/static/css/main.94f178a3.chunk.css",
-    "main.js": "/Beer-catalog/static/js/main.154c8f92.chunk.js",
-    "main.js.map": "/Beer-catalog/static/js/main.154c8f92.chunk.js.map",
-    "runtime-main.js": "/Beer-catalog/static/js/runtime-main.3c50c26d.js",
-    "runtime-main.js.map": "/Beer-catalog/static/js/runtime-main.3c50c26d.js.map",
+    "main.css": "/Beer-catalog/static/css/main.0a6a1eb7.chunk.css",
+    "main.js": "/Beer-catalog/static/js/main.09f58d3d.chunk.js",
+    "main.js.map": "/Beer-catalog/static/js/main.09f58d3d.chunk.js.map",
+    "runtime-main.js": "/Beer-catalog/static/js/runtime-main.fa4527e0.js",
+    "runtime-main.js.map": "/Beer-catalog/static/js/runtime-main.fa4527e0.js.map",
     "static/css/2.1e58ee36.chunk.css": "/Beer-catalog/static/css/2.1e58ee36.chunk.css",
-    "static/js/2.69217e6f.chunk.js": "/Beer-catalog/static/js/2.69217e6f.chunk.js",
-    "static/js/2.69217e6f.chunk.js.map": "/Beer-catalog/static/js/2.69217e6f.chunk.js.map",
-    "static/js/3.50e8bbad.chunk.js": "/Beer-catalog/static/js/3.50e8bbad.chunk.js",
-    "static/js/3.50e8bbad.chunk.js.map": "/Beer-catalog/static/js/3.50e8bbad.chunk.js.map",
+    "static/js/2.1dd4cba1.chunk.js": "/Beer-catalog/static/js/2.1dd4cba1.chunk.js",
+    "static/js/2.1dd4cba1.chunk.js.map": "/Beer-catalog/static/js/2.1dd4cba1.chunk.js.map",
+    "static/js/3.5fba6cdd.chunk.js": "/Beer-catalog/static/js/3.5fba6cdd.chunk.js",
+    "static/js/3.5fba6cdd.chunk.js.map": "/Beer-catalog/static/js/3.5fba6cdd.chunk.js.map",
     "index.html": "/Beer-catalog/index.html",
     "static/css/2.1e58ee36.chunk.css.map": "/Beer-catalog/static/css/2.1e58ee36.chunk.css.map",
-    "static/css/main.94f178a3.chunk.css.map": "/Beer-catalog/static/css/main.94f178a3.chunk.css.map",
-    "static/js/2.69217e6f.chunk.js.LICENSE.txt": "/Beer-catalog/static/js/2.69217e6f.chunk.js.LICENSE.txt"
+    "static/css/main.0a6a1eb7.chunk.css.map": "/Beer-catalog/static/css/main.0a6a1eb7.chunk.css.map",
+    "static/js/2.1dd4cba1.chunk.js.LICENSE.txt": "/Beer-catalog/static/js/2.1dd4cba1.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.3c50c26d.js",
+    "static/js/runtime-main.fa4527e0.js",
     "static/css/2.1e58ee36.chunk.css",
-    "static/js/2.69217e6f.chunk.js",
-    "static/css/main.94f178a3.chunk.css",
-    "static/js/main.154c8f92.chunk.js"
+    "static/js/2.1dd4cba1.chunk.js",
+    "static/css/main.0a6a1eb7.chunk.css",
+    "static/js/main.09f58d3d.chunk.js"
   ]
 }
