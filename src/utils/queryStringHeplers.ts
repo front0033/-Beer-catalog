@@ -79,7 +79,7 @@ export const countByIdFromUrl = (search: string, id: string): number => {
   return current ? +current[1] : 0;
 };
 
-export const countIdsFromUrl = (search: string): number => search.replace('?', '').split('&').length;
+export const countIdsFromUrl = (search: string): number => (search ? search.replace('?', '').split('&').length : 0);
 
 export const getTotalCount = (search: string) =>
   search
