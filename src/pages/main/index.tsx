@@ -16,7 +16,7 @@ const MainPage = () => {
   const { search } = useLocation();
 
   React.useEffect(() => {
-    BeerCollectionStore.loadAll();
+    BeerCollectionStore.loadByParams();
   }, []);
 
   return (

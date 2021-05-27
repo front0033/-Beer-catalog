@@ -1,6 +1,7 @@
 import { types, flow, applySnapshot } from 'mobx-state-tree';
 import beerApi from 'api/beer';
 import { ApiErrorsStore } from 'store';
+import { IBeerListParams } from 'api/types';
 import BeerModel from './Beer';
 import { RemoteDataModel } from './RemoteData';
 
@@ -13,11 +14,11 @@ const BeerCollection = types
   )
   .named('BeerCollection')
   .actions((self) => {
-    const loadAll = flow(function* loadAll() {
+    const loadByParams = flow(function* loadAll(params: IBeerListParams = {}) {
       self.setPending();
 
       try {
-        const { data } = yield beerApi.get();
+        const { data } = yield beerApi.get(params);
 
         setTimeout(() => {
           applySnapshot(self.items, data);
@@ -30,7 +31,7 @@ const BeerCollection = types
     });
 
     return {
-      loadAll,
+      loadByParams,
     };
   });
 

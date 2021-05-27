@@ -13,6 +13,7 @@ import routes from 'routes';
 import BeerCart from 'pages/cart';
 
 import './App.css';
+import { BeerCollectionStore } from 'store';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -27,7 +28,7 @@ export default function App() {
         {/** breabCrumbs */}
         <Layout className="site-layout-background">
           <Sider className="site-layout-background" width={200}>
-            <BeerMenu />
+            <BeerMenu onSelect={BeerCollectionStore.loadByParams} />
           </Sider>
           <Content style={{ padding: '0 24px', minHeight: 280 }}>
             <Switch>

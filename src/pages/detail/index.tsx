@@ -57,7 +57,7 @@ const BeerDetails: React.FC<{}> = () => {
       )}
       {item.dataLoadSuccess && (
         <div className="details-container">
-          <img className="details-beer-img" src={item.image_url} alt={item.name} />
+          <img className="details-beer-img" src={item.image_url || ''} alt={item.name} />
           <div>
             <Descriptions className="beer-card_description" title="Details" size="middle" column={2}>
               <Descriptions.Item label="Description" span={2}>

@@ -46,7 +46,7 @@ const BeerCard: React.FC<IBeerCardProps> = ({ data }) => {
       ]}
     >
       <Meta
-        avatar={<img className="beer-img" src={data.image_url} alt={data.name} />}
+        avatar={<img className="beer-img" src={data.image_url || ''} alt={data.name} />}
         title={data.name}
         description={data.description}
       />

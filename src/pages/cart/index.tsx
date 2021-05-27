@@ -47,7 +47,7 @@ const BeerCart: React.FC<{}> = () => {
           {CartStore.items.map((item, i) => (
             <React.Fragment key={item.id}>
               <div className="card_item-container">
-                <img className="cart-beer-img" src={item.image_url} alt={item.name} />
+                <img className="cart-beer-img" src={item.image_url || ''} alt={item.name} />
                 <div>
                   <Descriptions
                     className="cart_item_description"

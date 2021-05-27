@@ -17,7 +17,7 @@ export interface IBeerDTO {
   first_brewed: string;
   food_pairing: string[];
   ibu: number | null;
-  image_url: string;
+  image_url: string | null;
   ph: number | null;
   srm: number | null;
   target_fg: number;

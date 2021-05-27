@@ -1,14 +1,25 @@
 import { IBeerListParams } from 'api/types';
 
-type BeerMenuConfig = Record<string, { params: IBeerListParams; label: string }>;
+type BeerMenuConfig<T extends string> = Record<T, { params: IBeerListParams; label: string }>;
 
-export const ABVBeerTypeConfig: BeerMenuConfig = {
+export type BeerStrengthType = 'hard' | 'middle' | 'light';
+export type BeerColoursType =
+  | 'lightBlonde'
+  | 'blonde'
+  | 'gold'
+  | 'amber'
+  | 'copper'
+  | 'darkCopper'
+  | 'veryDarkBrown'
+  | 'black';
+
+export const ABVBeerTypeConfig: BeerMenuConfig<BeerStrengthType> = {
   hard: { params: { abv_gt: 10 }, label: 'Hard' },
   middle: { params: { abv_lt: 10, abv_gt: 5 }, label: 'Middle' },
   light: { params: { abv_lt: 5 }, label: 'Light' },
 };
 
-export const ColorBeerTypeConfig: BeerMenuConfig = {
+export const ColorBeerTypeConfig: BeerMenuConfig<BeerColoursType> = {
   lightBlonde: { params: { ebc_gt: 6, ebc_lt: 9 }, label: 'Light Blonde' },
   blonde: { params: { ebc_gt: 9, ebc_lt: 12 }, label: 'Blonde (yellow)' },
   gold: { params: { ebc_gt: 12, ebc_lt: 20 }, label: 'Gold' },

@@ -43,7 +43,7 @@ const BeerModel = types
     first_brewed: types.string,
     food_pairing: types.array(types.string),
     ibu: types.maybeNull(types.number),
-    image_url: types.string,
+    image_url: types.maybeNull(types.string),
     ph: types.maybeNull(types.number),
     srm: types.maybeNull(types.number),
     target_fg: types.number,
