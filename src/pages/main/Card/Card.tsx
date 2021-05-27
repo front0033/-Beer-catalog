@@ -20,9 +20,6 @@ const { Meta } = Card;
 
 const BeerCard: React.FC<IBeerCardProps> = ({ data }) => {
   const { search } = useLocation();
-  const addItemToCard = () => {
-    CartStore.addProduct(data);
-  };
 
   return (
     <Card
@@ -30,13 +27,12 @@ const BeerCard: React.FC<IBeerCardProps> = ({ data }) => {
       actions={[
         <Button icon={<StarOutlined />} />,
 
-        <Link to={routes.details(String(data.id)) + CartStore.paramsToCart}>
+        <Link to={routes.details(String(data.id)) + search}>
           <Button>Details...</Button>
         </Link>,
         <Link to={routes.main() + addIdToUrl(search, String(data.id))}>
           <Button
             className="beer_add-to-cart"
-            onClick={addItemToCard}
             icon={
               <>
                 <PlusCircleOutlined /> 1 in
@@ -45,7 +41,7 @@ const BeerCard: React.FC<IBeerCardProps> = ({ data }) => {
             }
           />
         </Link>,
-        <Link to={routes.cart() + CartStore.paramsToCart}>
+        <Link to={routes.cart() + search}>
           <Button className="actions-container_item" icon={<ShoppingCartOutlined />} />
         </Link>,
       ]}

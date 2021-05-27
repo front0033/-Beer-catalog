@@ -1,8 +1,8 @@
 import beerApi from 'api/beer';
-import { types, flow, applySnapshot, getSnapshot } from 'mobx-state-tree';
+import { types, flow, applySnapshot } from 'mobx-state-tree';
 import { ApiErrorsStore } from 'store';
 import BaseModel from './Base';
-import BeerModel, { IBeer } from './Beer';
+import BeerModel from './Beer';
 
 const CartModel = types.model({
   items: types.array(BeerModel),
@@ -17,30 +17,9 @@ const Cart = types
     get count() {
       return self.items.toJSON().length;
     },
-    get paramsToCart() {
-      let params = '';
-      self.items.forEach((item, i) => {
-        params += `${i ? '&' : '?'}${item.id}=${item.selectedCount}`;
-      });
-
-      return params;
-    },
   }))
   .actions((self) => {
     const getCurrentProduct = (id: number) => self.items.toJSON().find((product) => product.id === id);
-
-    const addProduct = (item: IBeer) => {
-      const currentProduct = getCurrentProduct(item.id);
-      if (currentProduct) {
-        currentProduct.incrementCount();
-      } else {
-        self.items.push(getSnapshot(item));
-      }
-    };
-
-    const removeItem = (item: IBeer) => {
-      self.items.replace([...self.items.toJSON()].filter((product) => product.id !== item.id));
-    };
 
     /** ids most be type: 1|2|3|4 */
     const loadByIds = flow(function* loadById(ids: string) {
@@ -52,7 +31,7 @@ const Cart = types
       }
     });
 
-    return { addProduct, getCurrentProduct, removeItem, loadByIds };
+    return { getCurrentProduct, loadByIds };
   });
 
 export default Cart;

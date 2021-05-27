@@ -24,10 +24,10 @@ const BeerCart: React.FC<{}> = () => {
       <div className="bread-crumb">
         <Breadcrumb>
           <Breadcrumb.Item key="home">
-            <Link to={routes.main() + CartStore.paramsToCart}>Catalog</Link>
+            <Link to={routes.main() + search}>Catalog</Link>
           </Breadcrumb.Item>
           <Breadcrumb.Item key="cart">
-            <Link to={routes.cart() + CartStore.paramsToCart}>Cart</Link>
+            <Link to={routes.cart() + search}>Cart</Link>
           </Breadcrumb.Item>
         </Breadcrumb>
       </div>
@@ -45,7 +45,7 @@ const BeerCart: React.FC<{}> = () => {
                 <Descriptions.Item label="price">{defaultPrice * item.selectedCount} $</Descriptions.Item>
               </Descriptions>
               <div className="cart_item_actions">
-                <Link to={routes.details(item.id.toString() + CartStore.paramsToCart)}>
+                <Link to={routes.details(item.id.toString()) + search}>
                   <Button className="cart_item_first_btn">Details</Button>
                 </Link>
                 <Link to={routes.cart() + removeIdFromUrl(search, String(item.id))}>
@@ -59,7 +59,7 @@ const BeerCart: React.FC<{}> = () => {
       <Title level={4}>TOTAL: {totalCount * defaultPrice} $</Title>
       {CartStore.items.toJSON().length && (
         <div className="cart_button-container">
-          <Link to={routes.order() + CartStore.paramsToCart}>
+          <Link to={routes.order() + search}>
             <Button type="primary">Go to ordering</Button>
           </Link>
         </div>

@@ -7,15 +7,13 @@ import { BeerCollectionStore, CartStore } from 'store';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router-dom';
 import routes from 'routes';
-import useLoadPruductByQueryUrl from 'hooks/loadPruductByQueryUrl';
+import { getIdsLength } from 'utils/queryStringHeplers';
 
 import BeerCard from './Card/Card';
 import './styles.css';
 
 const MainPage = () => {
   const { search } = useLocation();
-
-  useLoadPruductByQueryUrl(search);
 
   React.useEffect(() => {
     BeerCollectionStore.loadAll();
@@ -28,9 +26,9 @@ const MainPage = () => {
           <Search placeholder="please input text" enterButton="Search" size="large" />
         </div>
         {!!CartStore.items.toJSON().length && (
-          <Link to={routes.cart() + CartStore.paramsToCart}>
+          <Link to={routes.cart() + search}>
             <Button className="actions-container_item" icon={<ShoppingCartOutlined />}>
-              In Cart {CartStore.items.toJSON().length} items
+              In Cart {getIdsLength(search)} items
             </Button>
           </Link>
         )}

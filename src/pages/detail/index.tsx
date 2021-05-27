@@ -17,7 +17,13 @@ import { initialBeer } from 'models/Beer';
 
 import './styles.css';
 import routes from 'routes';
-import { addIdToUrl, removeIdFromUrl } from 'utils/queryStringHeplers';
+import {
+  addIdToUrl,
+  countByIdFromUrl,
+  decrementCountFromIdFromUrl,
+  isExistIdFromUrl,
+  removeIdFromUrl,
+} from 'utils/queryStringHeplers';
 
 const BeerDetails: React.FC<{}> = () => {
   const { id } = useParams<{ id: string }>();
@@ -31,29 +37,13 @@ const BeerDetails: React.FC<{}> = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  const countPlusClick = () => {
-    item.incrementCount();
-  };
-  const countMinusClick = () => {
-    item.decrementCount();
-  };
-
-  const addItemToCard = () => {
-    CartStore.addProduct(item);
-  };
-
-  const removeItem = () => {
-    CartStore.removeItem(item);
-    item.setCount(1);
-  };
-
   return (
     // eslint-disable-next-line react/jsx-key
     <Card title={item.name} actions={[<StarOutlined />]}>
       <div className="bread-crumb">
         <Breadcrumb>
           <Breadcrumb.Item key="home">
-            <Link to={routes.main() + CartStore.paramsToCart}>Catalog</Link>
+            <Link to={routes.main() + search}>Catalog</Link>
           </Breadcrumb.Item>
           <Breadcrumb.Item key={id}>
             <Link to={routes.details(id)}>{item.name}</Link>
@@ -85,23 +75,27 @@ const BeerDetails: React.FC<{}> = () => {
             {/** TODO need add ingredients */}
           </Descriptions>
           <div className="actions-container">
-            <Button icon={<PlusOutlined />} onClick={countPlusClick} />
-            <Button icon={<MinusOutlined />} onClick={countMinusClick} />
-            <Typography className="actions-container_item">{item.selectedCount}</Typography>
-            {!!CartStore.count && !!CartStore.getCurrentProduct(item.id) ? (
+            <Link to={routes.details(id) + addIdToUrl(search, id)}>
+              <Button icon={<PlusOutlined />} />
+            </Link>
+            <Link to={routes.details(id) + decrementCountFromIdFromUrl(search, id)}>
+              <Button icon={<MinusOutlined />} />
+            </Link>
+            <Typography className="actions-container_item">{countByIdFromUrl(search, id)}</Typography>
+            {isExistIdFromUrl(search, id) ? (
               <Link to={routes.details(id) + removeIdFromUrl(search, String(id))}>
-                <Button className="actions-container_item" icon={<DeleteOutlined />} onClick={removeItem}>
+                <Button className="actions-container_item" icon={<DeleteOutlined />}>
                   Remove from Card
                 </Button>
               </Link>
             ) : (
               <Link to={routes.details(id) + addIdToUrl(search, String(id))}>
-                <Button className="actions-container_item" icon={<PlusCircleOutlined />} onClick={addItemToCard}>
+                <Button className="actions-container_item" icon={<PlusCircleOutlined />}>
                   Add to Card
                 </Button>
               </Link>
             )}
-            <Link to={routes.cart() + CartStore.paramsToCart}>
+            <Link to={routes.cart() + search}>
               <Button className="actions-container_item" icon={<ShoppingCartOutlined />}>
                 Go to Cart
               </Button>

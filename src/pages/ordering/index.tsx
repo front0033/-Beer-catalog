@@ -5,16 +5,14 @@ import { Link, useLocation } from 'react-router-dom';
 import routes from 'routes';
 import { CartStore } from 'store';
 import Order, { initialValues, OrderFields } from 'models/Order';
+import { getIdsLength } from 'utils/queryStringHeplers';
 
 import './styles.css';
-import useLoadPruductByQueryUrl from 'hooks/loadPruductByQueryUrl';
 
 const { Title } = Typography;
 
 const Ordering: React.FC<{}> = () => {
   const { search } = useLocation();
-
-  useLoadPruductByQueryUrl(search);
 
   const item = React.useRef(Order.create(initialValues)).current;
 
@@ -22,18 +20,18 @@ const Ordering: React.FC<{}> = () => {
     item.setField(fieldName, e.target.value);
   };
 
+  const productsLength = getIdsLength(search);
+
   return (
     <Card title="Ordering" className="beer-order">
       <div className="bread-crumb">
         <Breadcrumb>
           <Breadcrumb.Item key="home">
-            <Link to={routes.main() + CartStore.paramsToCart}>Catalog</Link>
+            <Link to={routes.main() + search}>Catalog</Link>
           </Breadcrumb.Item>
           <Breadcrumb.Item key="cart">
-            <Link to={routes.cart() + CartStore.paramsToCart}>
-              {CartStore.items.toJSON().length
-                ? `Selected ${CartStore.items.toJSON().length} products in cart`
-                : 'Empty Cart'}
+            <Link to={routes.cart() + search}>
+              {productsLength ? `Selected ${productsLength} products in cart` : 'Empty Cart'}
             </Link>
           </Breadcrumb.Item>
         </Breadcrumb>

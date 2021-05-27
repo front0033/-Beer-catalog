@@ -56,12 +56,6 @@ const BeerModel = types
     setCount(count: number) {
       self.selectedCount = count || 1;
     },
-    incrementCount() {
-      self.selectedCount += 1;
-    },
-    decrementCount() {
-      self.selectedCount -= 1;
-    },
   }));
 
 export default BeerModel;
