@@ -14,8 +14,11 @@ const BeerDetail = types
       self.setPending();
       try {
         const { data } = yield beerApi.getById(id);
-        self.setLoadSuccess();
-        applySnapshot(self, data[0]);
+
+        setTimeout(() => {
+          applySnapshot(self, data[0]);
+          self.setLoadSuccess();
+        }, 2000);
       } catch (e) {
         self.setError();
         ApiErrorsStore.addError(e);

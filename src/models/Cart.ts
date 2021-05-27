@@ -3,6 +3,7 @@ import { types, flow, applySnapshot } from 'mobx-state-tree';
 import { ApiErrorsStore } from 'store';
 import BaseModel from './Base';
 import BeerModel from './Beer';
+import { RemoteDataModel } from './RemoteData';
 
 const CartModel = types.model({
   items: types.array(BeerModel),
@@ -11,7 +12,7 @@ const CartModel = types.model({
 });
 
 const Cart = types
-  .compose(BaseModel, CartModel)
+  .compose(BaseModel, RemoteDataModel, CartModel)
   .named('Cart')
   .views((self) => ({
     get count() {
@@ -23,11 +24,17 @@ const Cart = types
 
     /** ids most be type: 1|2|3|4 */
     const loadByIds = flow(function* loadById(ids: string) {
+      self.setPending();
       try {
         const { data } = yield beerApi.getByIds(ids);
-        applySnapshot(self.items, data);
+
+        setTimeout(() => {
+          applySnapshot(self.items, data);
+          self.setLoadSuccess();
+        }, 2000);
       } catch (e) {
         ApiErrorsStore.addError(e);
+        self.setError();
       }
     });
 
