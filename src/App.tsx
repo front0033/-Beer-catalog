@@ -18,7 +18,7 @@ export default function App() {
       <Header className="header">Beans Love Beers</Header>
       <Layout>
         <Content>
-          <Router>
+          <Router basename={process.env.PUBLIC_URL}>
             <Switch>
               <Route exact path={routes.main()}>
                 <MainPage />
