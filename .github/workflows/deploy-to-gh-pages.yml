@@ -10,7 +10,7 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v2.3.1
         with:
-          persist-credentials: false 
+          persist-credentials: false
 
       - name: Install and Build 🔧
         run: |
@@ -19,10 +19,9 @@ jobs:
         env:
           REACT_APP_BEER_API_URL: ${{ secrets.REACT_APP_BEER_API_URL }}
 
-
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.6.2
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: dist
+          FOLDER: build
