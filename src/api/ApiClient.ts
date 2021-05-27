@@ -60,7 +60,7 @@ export const onRejected = (error: any) => {
 
 export const onFulfilled = (response: any) => response;
 
-const API_URL = 'https://api.punkapi.com/v2';
+const API_URL = process.env.REACT_APP_BEER_API_URL;
 
 const ApiClient = axios.create({
   baseURL: API_URL,
