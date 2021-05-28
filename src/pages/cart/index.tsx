@@ -1,10 +1,10 @@
-import { Alert, Breadcrumb, Button, Card, Descriptions, Skeleton, Typography } from 'antd';
+import { Alert, Button, Card, Descriptions, Skeleton, Typography } from 'antd';
 import useLoadPruductByQueryUrl from 'hooks/loadPruductByQueryUrl';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import routes from 'routes';
-import { CartStore } from 'store';
+import { BreaadCrumbsStore, CartStore } from 'store';
 import { countByIdFromUrl, getTotalCount, removeIdFromUrl, countIdsFromUrl } from 'utils/queryStringHeplers';
 
 import './styles.css';
@@ -22,18 +22,13 @@ const BeerCart: React.FC<{}> = () => {
 
   const productsLength = countIdsFromUrl(search);
 
+  React.useEffect(() => {
+    BreaadCrumbsStore.replaceEnd([{ id: 'cart', label: 'Cart', link: routes.cart() + search }]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search]);
+
   return (
     <Card title="Cart" className="beer-cart">
-      <div className="bread-crumb">
-        <Breadcrumb>
-          <Breadcrumb.Item key="home">
-            <Link to={routes.main() + search}>Catalog</Link>
-          </Breadcrumb.Item>
-          <Breadcrumb.Item key="cart">
-            <Link to={routes.cart() + search}>Cart</Link>
-          </Breadcrumb.Item>
-        </Breadcrumb>
-      </div>
       {CartStore.dataPending && (
         <>
           <Skeleton loading active />

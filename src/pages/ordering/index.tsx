@@ -1,4 +1,4 @@
-import { Form, Alert, Breadcrumb, Button, Card, Input, Typography } from 'antd';
+import { Form, Alert, Button, Card, Input, Typography } from 'antd';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -7,6 +7,7 @@ import Order, { initialValues, OrderFields } from 'models/Order';
 import { countIdsFromUrl } from 'utils/queryStringHeplers';
 
 import './styles.css';
+import { BreaadCrumbsStore } from 'store';
 
 const { Title } = Typography;
 
@@ -14,27 +15,25 @@ const Ordering: React.FC<{}> = () => {
   const { search } = useLocation();
 
   const item = React.useRef(Order.create(initialValues)).current;
+  const productsLength = countIdsFromUrl(search);
+
+  React.useEffect(() => {
+    BreaadCrumbsStore.replaceEnd([
+      {
+        id: 'cart',
+        label: productsLength ? `Selected ${productsLength} products in cart` : 'Empty Cart',
+        link: routes.cart() + search,
+      },
+      { id: 'order', label: 'Order', link: routes.order() + search },
+    ]);
+  }, [productsLength, search]);
 
   const handleChange = (fieldName: OrderFields): React.ChangeEventHandler<HTMLInputElement> => (e) => {
     item.setField(fieldName, e.target.value);
   };
 
-  const productsLength = countIdsFromUrl(search);
-
   return (
     <Card title="Ordering" className="beer-order">
-      <div className="bread-crumb">
-        <Breadcrumb>
-          <Breadcrumb.Item key="home">
-            <Link to={routes.main() + search}>Catalog</Link>
-          </Breadcrumb.Item>
-          <Breadcrumb.Item key="cart">
-            <Link to={routes.cart() + search}>
-              {productsLength ? `Selected ${productsLength} products in cart` : 'Empty Cart'}
-            </Link>
-          </Breadcrumb.Item>
-        </Breadcrumb>
-      </div>
       {!productsLength && <Alert message="Products not found" type="info" />}
       {productsLength && (
         <>

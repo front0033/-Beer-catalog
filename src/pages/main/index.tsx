@@ -3,7 +3,7 @@ import * as React from 'react';
 import Search from 'antd/lib/input/Search';
 import { Button, Card, Col, Row, Skeleton } from 'antd';
 import { observer } from 'mobx-react';
-import { BeerCollectionStore } from 'store';
+import { BeerCollectionStore, BreaadCrumbsStore } from 'store';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router-dom';
 import routes from 'routes';
@@ -16,6 +16,7 @@ const MainPage = () => {
   const { search } = useLocation();
 
   React.useEffect(() => {
+    BreaadCrumbsStore.setOne();
     BeerCollectionStore.loadByParams();
   }, []);
 

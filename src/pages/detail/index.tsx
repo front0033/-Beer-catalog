@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Breadcrumb, Button, Card, Descriptions, Skeleton, Typography } from 'antd';
+import { Button, Card, Descriptions, Skeleton, Typography } from 'antd';
 import {
   DeleteOutlined,
   MinusOutlined,
@@ -23,6 +23,7 @@ import {
   isExistIdFromUrl,
   removeIdFromUrl,
 } from 'utils/queryStringHeplers';
+import { BreaadCrumbsStore } from 'store';
 
 const BeerDetails: React.FC<{}> = () => {
   const { id } = useParams<{ id: string }>();
@@ -36,19 +37,14 @@ const BeerDetails: React.FC<{}> = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
+  React.useEffect(() => {
+    BreaadCrumbsStore.replaceEnd([{ id, label: item.name, link: routes.details(id) + search }]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [item.name]);
+
   return (
     // eslint-disable-next-line react/jsx-key
     <Card title={item.name} actions={[<StarOutlined />]}>
-      <div className="bread-crumb">
-        <Breadcrumb>
-          <Breadcrumb.Item key="home">
-            <Link to={routes.main() + search}>Catalog</Link>
-          </Breadcrumb.Item>
-          <Breadcrumb.Item key={id}>
-            <Link to={routes.details(id)}>{item.name}</Link>
-          </Breadcrumb.Item>
-        </Breadcrumb>
-      </div>
       {item.dataPending && (
         <>
           <Skeleton loading active />
