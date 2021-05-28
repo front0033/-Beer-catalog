@@ -21,6 +21,11 @@
 .main-page_container .ant-row {
   width: 100%;
 }
+
 .main-page_search_container {
   width: 70%;
+}
+
+.catalog-item-sceleton {
+  height: 410px;
 }

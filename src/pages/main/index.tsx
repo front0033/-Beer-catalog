@@ -44,7 +44,7 @@ const MainPage = () => {
             // eslint-disable-next-line react/no-array-index-key
             <Col key={i} className="main-page_beer-list_col" span={8}>
               <Card>
-                <Skeleton loading avatar active />
+                <Skeleton className="catalog-item-sceleton" loading avatar active />
               </Card>
             </Col>
           ))}
