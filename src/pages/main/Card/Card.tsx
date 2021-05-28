@@ -12,12 +12,13 @@ import { IBeer } from 'models/Beer';
 import { addIdToUrl } from 'utils/queryStringHeplers';
 
 interface IBeerCardProps {
+  category: string;
   data: IBeer;
 }
 
 const { Meta } = Card;
 
-const BeerCard: React.FC<IBeerCardProps> = ({ data }) => {
+const BeerCard: React.FC<IBeerCardProps> = ({ category, data }) => {
   const { search } = useLocation();
 
   return (
@@ -26,10 +27,10 @@ const BeerCard: React.FC<IBeerCardProps> = ({ data }) => {
       actions={[
         <Button icon={<StarOutlined />} />,
 
-        <Link to={routes.details(String(data.id)) + search}>
+        <Link to={routes.details(category, String(data.id)) + search}>
           <Button>Details...</Button>
         </Link>,
-        <Link to={routes.main() + addIdToUrl(search, String(data.id))}>
+        <Link to={routes.mainWithCategory(category) + addIdToUrl(search, String(data.id))}>
           <Button
             className="beer_add-to-cart"
             icon={

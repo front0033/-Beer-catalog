@@ -26,7 +26,7 @@ import {
 import { BreaadCrumbsStore } from 'store';
 
 const BeerDetails: React.FC<{}> = () => {
-  const { id } = useParams<{ id: string }>();
+  const { category, id } = useParams<{ category: string; id: string }>();
   const { search } = useLocation();
   const item = React.useRef(BeerDetail.create({ ...initialBeer })).current;
 
@@ -38,7 +38,7 @@ const BeerDetails: React.FC<{}> = () => {
   }, [id]);
 
   React.useEffect(() => {
-    BreaadCrumbsStore.replaceEnd([{ id, label: item.name, link: routes.details(id) + search }]);
+    BreaadCrumbsStore.replaceEnd([{ id, label: item.name, link: routes.details(category, id) + search }]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [item.name]);
 
@@ -77,27 +77,27 @@ const BeerDetails: React.FC<{}> = () => {
               {/** TODO need add ingredients */}
             </Descriptions>
             <div className="actions-container">
-              <Link to={routes.details(id) + addIdToUrl(search, id)}>
+              <Link to={routes.details(category, id) + addIdToUrl(search, id)}>
                 <Button icon={<PlusOutlined />} />
               </Link>
-              <Link to={routes.details(id) + decrementCountFromIdFromUrl(search, id)}>
+              <Link to={routes.details(category, id) + decrementCountFromIdFromUrl(search, id)}>
                 <Button icon={<MinusOutlined />} />
               </Link>
               <Typography className="actions-container_item">{countByIdFromUrl(search, id)}</Typography>
               {isExistIdFromUrl(search, id) ? (
-                <Link to={routes.details(id) + removeIdFromUrl(search, String(id))}>
+                <Link to={routes.details(category, id) + removeIdFromUrl(search, String(id))}>
                   <Button className="actions-container_item" icon={<DeleteOutlined />}>
                     Remove from Card
                   </Button>
                 </Link>
               ) : (
-                <Link to={routes.details(id) + addIdToUrl(search, String(id))}>
+                <Link to={routes.details(category, id) + addIdToUrl(search, String(id))}>
                   <Button className="actions-container_item" icon={<PlusCircleOutlined />}>
                     Add to Card
                   </Button>
                 </Link>
               )}
-              <Link to={routes.cart() + search}>
+              <Link to={routes.cart(category) + search}>
                 <Button className="actions-container_item" icon={<ShoppingCartOutlined />}>
                   Go to Cart
                 </Button>

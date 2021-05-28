@@ -5,15 +5,27 @@ import { Button, Card, Col, Row, Skeleton } from 'antd';
 import { observer } from 'mobx-react';
 import { BeerCollectionStore, BreaadCrumbsStore } from 'store';
 import { ShoppingCartOutlined } from '@ant-design/icons';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import routes from 'routes';
 import { countIdsFromUrl } from 'utils/queryStringHeplers';
 
+import { ABVBeerTypeConfig, BeerStrengthType, ColorBeerTypeConfig, BeerColoursType } from 'components/menu/config';
 import BeerCard from './Card/Card';
 import './styles.css';
 
 const MainPage = () => {
   const { search } = useLocation();
+  const { category } = useParams<{ category: string }>();
+
+  React.useEffect(() => {
+    if (category) {
+      BeerCollectionStore.loadByParams(
+        category.includes('strength')
+          ? ABVBeerTypeConfig[category as BeerStrengthType].params
+          : ColorBeerTypeConfig[category as BeerColoursType].params
+      );
+    }
+  }, [category]);
 
   React.useEffect(() => {
     BreaadCrumbsStore.setOne();
@@ -51,7 +63,7 @@ const MainPage = () => {
         {BeerCollectionStore.dataLoadSuccess &&
           BeerCollectionStore.items.toJSON().map((beer) => (
             <Col key={beer.id} className="main-page_beer-list_col" span={8}>
-              <BeerCard data={beer} />
+              <BeerCard category={category} data={beer} />
             </Col>
           ))}
       </Row>

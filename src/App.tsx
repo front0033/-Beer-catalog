@@ -13,7 +13,7 @@ import routes from 'routes';
 import BeerCart from 'pages/cart';
 
 import './App.css';
-import { BeerCollectionStore, BreaadCrumbsStore } from 'store';
+import { BreaadCrumbsStore } from 'store';
 import { observer } from 'mobx-react';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -34,10 +34,13 @@ const App: React.FC = () => (
       </Breadcrumb>
       <Layout className="site-layout-background">
         <Sider className="site-layout-background" width={200}>
-          <BeerMenu onSelect={BeerCollectionStore.loadByParams} />
+          <BeerMenu selectedCategory="gold" />
         </Sider>
         <Content style={{ padding: '0 24px', minHeight: 280 }}>
           <Switch>
+            <Route exact path={routes.mainWithCategory()}>
+              <MainPage />
+            </Route>
             <Route exact path={routes.main()}>
               <MainPage />
             </Route>

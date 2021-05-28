@@ -1,7 +1,7 @@
 import { Form, Alert, Button, Card, Input, Typography } from 'antd';
 import { observer } from 'mobx-react';
 import * as React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import routes from 'routes';
 import Order, { initialValues, OrderFields } from 'models/Order';
 import { countIdsFromUrl } from 'utils/queryStringHeplers';
@@ -13,6 +13,7 @@ const { Title } = Typography;
 
 const Ordering: React.FC<{}> = () => {
   const { search } = useLocation();
+  const { category } = useParams<{ category: string }>();
 
   const item = React.useRef(Order.create(initialValues)).current;
   const productsLength = countIdsFromUrl(search);
@@ -22,11 +23,11 @@ const Ordering: React.FC<{}> = () => {
       {
         id: 'cart',
         label: productsLength ? `Selected ${productsLength} products in cart` : 'Empty Cart',
-        link: routes.cart() + search,
+        link: routes.cart(category) + search,
       },
-      { id: 'order', label: 'Order', link: routes.order() + search },
+      { id: 'order', label: 'Order', link: routes.order(category) + search },
     ]);
-  }, [productsLength, search]);
+  }, [productsLength, search, category]);
 
   const handleChange = (fieldName: OrderFields): React.ChangeEventHandler<HTMLInputElement> => (e) => {
     item.setField(fieldName, e.target.value);
@@ -133,7 +134,7 @@ const Ordering: React.FC<{}> = () => {
             </div>
           </div>
           <div className="cart_button-container">
-            <Link to={routes.order()}>
+            <Link to={routes.order(category)}>
               <Button type="primary">Buy $$$</Button>
             </Link>
           </div>

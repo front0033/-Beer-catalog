@@ -1,8 +1,9 @@
+import * as React from 'react';
+
 import { Alert, Button, Card, Descriptions, Skeleton, Typography } from 'antd';
 import useLoadPruductByQueryUrl from 'hooks/loadPruductByQueryUrl';
 import { observer } from 'mobx-react';
-import * as React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import routes from 'routes';
 import { BreaadCrumbsStore, CartStore } from 'store';
 import { countByIdFromUrl, getTotalCount, removeIdFromUrl, countIdsFromUrl } from 'utils/queryStringHeplers';
@@ -14,6 +15,7 @@ const { Title } = Typography;
 const DEFAULT_PRICE = 3.5;
 
 const BeerCart: React.FC<{}> = () => {
+  const { category } = useParams<{ category: string }>();
   const { search } = useLocation();
 
   useLoadPruductByQueryUrl(search);
@@ -23,7 +25,7 @@ const BeerCart: React.FC<{}> = () => {
   const productsLength = countIdsFromUrl(search);
 
   React.useEffect(() => {
-    BreaadCrumbsStore.replaceEnd([{ id: 'cart', label: 'Cart', link: routes.cart() + search }]);
+    BreaadCrumbsStore.replaceEnd([{ id: 'cart', label: 'Cart', link: routes.cart(category) + search }]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
@@ -59,10 +61,10 @@ const BeerCart: React.FC<{}> = () => {
                     </Descriptions.Item>
                   </Descriptions>
                   <div className="cart_item_actions">
-                    <Link to={routes.details(item.id.toString()) + search}>
+                    <Link to={routes.details(category, item.id.toString()) + search}>
                       <Button className="cart_item_first_btn">Details</Button>
                     </Link>
-                    <Link to={routes.cart() + removeIdFromUrl(search, String(item.id))}>
+                    <Link to={routes.cart(category) + removeIdFromUrl(search, String(item.id))}>
                       <Button>Remove</Button>
                     </Link>
                   </div>
@@ -73,7 +75,7 @@ const BeerCart: React.FC<{}> = () => {
           <Title level={4}>TOTAL: {totalCount * DEFAULT_PRICE} $</Title>
           {CartStore.items.toJSON().length && (
             <div className="cart_button-container">
-              <Link to={routes.order() + search}>
+              <Link to={routes.order(category) + search}>
                 <Button type="primary">Go to ordering</Button>
               </Link>
             </div>
