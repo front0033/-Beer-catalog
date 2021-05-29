@@ -29,3 +29,6 @@ export const ColorBeerTypeConfig: BeerMenuConfig<BeerColoursType> = {
   veryDarkBrown: { params: { ebc_gt: 75, ebc_lt: 120 }, label: 'Very Dark Brown (transparent)' },
   black: { params: { ebc_gt: 120 }, label: 'Black (not transparent)' },
 };
+
+export const getLabelBySubUrl = (id: string) =>
+  (ABVBeerTypeConfig[id as BeerStrengthType] || ColorBeerTypeConfig[id as BeerColoursType]).label;

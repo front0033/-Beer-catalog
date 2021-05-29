@@ -9,7 +9,13 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import routes from 'routes';
 import { countIdsFromUrl } from 'utils/queryStringHeplers';
 
-import { ABVBeerTypeConfig, BeerStrengthType, ColorBeerTypeConfig, BeerColoursType } from 'components/menu/config';
+import {
+  ABVBeerTypeConfig,
+  BeerStrengthType,
+  ColorBeerTypeConfig,
+  BeerColoursType,
+  getLabelBySubUrl,
+} from 'components/menu/config';
 import BeerCard from './Card/Card';
 import './styles.css';
 
@@ -18,7 +24,9 @@ const MainPage = () => {
   const { category } = useParams<{ category: string }>();
 
   React.useEffect(() => {
-    BreaadCrumbsStore.set([{ id: category, label: `Catalog ${category}`, url: routes.mainWithCategory(category) }]);
+    BreaadCrumbsStore.set([
+      { id: category, label: `Catalog ${getLabelBySubUrl(category)}`, url: routes.mainWithCategory(category) },
+    ]);
     if (category) {
       BeerCollectionStore.loadByParams(
         category.includes('strength')

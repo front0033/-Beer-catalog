@@ -9,6 +9,7 @@ import { BreaadCrumbsStore, CartStore } from 'store';
 import { countByIdFromUrl, getTotalCount, removeIdFromUrl, countIdsFromUrl } from 'utils/queryStringHeplers';
 
 import './styles.css';
+import { getLabelBySubUrl } from 'components/menu/config';
 
 const { Title } = Typography;
 
@@ -26,7 +27,7 @@ const BeerCart: React.FC<{}> = () => {
 
   React.useEffect(() => {
     BreaadCrumbsStore.set([
-      { id: category, label: `Catalog ${category}`, url: routes.mainWithCategory(category) },
+      { id: category, label: `Catalog ${getLabelBySubUrl(category)}`, url: routes.mainWithCategory(category) },
       { id: 'cart', label: 'Cart', url: routes.cart(category) + search },
     ]);
     // eslint-disable-next-line react-hooks/exhaustive-deps

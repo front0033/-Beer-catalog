@@ -24,6 +24,7 @@ import {
   removeIdFromUrl,
 } from 'utils/queryStringHeplers';
 import { BreaadCrumbsStore } from 'store';
+import { getLabelBySubUrl } from 'components/menu/config';
 
 const BeerDetails: React.FC<{}> = () => {
   const { category, id } = useParams<{ category: string; id: string }>();
@@ -39,7 +40,7 @@ const BeerDetails: React.FC<{}> = () => {
 
   React.useEffect(() => {
     BreaadCrumbsStore.set([
-      { id: category, label: `Catalog ${category}`, url: routes.mainWithCategory(category) },
+      { id: category, label: `Catalog ${getLabelBySubUrl(category)}`, url: routes.mainWithCategory(category) },
       { id, label: item.name, url: routes.details(category, id) + search },
     ]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
