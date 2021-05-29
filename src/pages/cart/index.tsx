@@ -25,9 +25,12 @@ const BeerCart: React.FC<{}> = () => {
   const productsLength = countIdsFromUrl(search);
 
   React.useEffect(() => {
-    BreaadCrumbsStore.replaceEnd([{ id: 'cart', label: 'Cart', link: routes.cart(category) + search }]);
+    BreaadCrumbsStore.set([
+      { id: category, label: `Catalog ${category}`, url: routes.mainWithCategory(category) },
+      { id: 'cart', label: 'Cart', url: routes.cart(category) + search },
+    ]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search]);
+  }, [category, search]);
 
   return (
     <Card title="Cart" className="beer-cart">

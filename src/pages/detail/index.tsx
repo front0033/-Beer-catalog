@@ -38,7 +38,10 @@ const BeerDetails: React.FC<{}> = () => {
   }, [id]);
 
   React.useEffect(() => {
-    BreaadCrumbsStore.replaceEnd([{ id, label: item.name, link: routes.details(category, id) + search }]);
+    BreaadCrumbsStore.set([
+      { id: category, label: `Catalog ${category}`, url: routes.mainWithCategory(category) },
+      { id, label: item.name, url: routes.details(category, id) + search },
+    ]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [item.name]);
 

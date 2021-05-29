@@ -19,13 +19,14 @@ const Ordering: React.FC<{}> = () => {
   const productsLength = countIdsFromUrl(search);
 
   React.useEffect(() => {
-    BreaadCrumbsStore.replaceEnd([
+    BreaadCrumbsStore.set([
+      { id: category, label: `Catalog ${category}`, url: routes.mainWithCategory(category) },
       {
         id: 'cart',
         label: productsLength ? `Selected ${productsLength} products in cart` : 'Empty Cart',
-        link: routes.cart(category) + search,
+        url: routes.cart(category) + search,
       },
-      { id: 'order', label: 'Order', link: routes.order(category) + search },
+      { id: 'order', label: 'Order', url: routes.order(category) + search },
     ]);
   }, [productsLength, search, category]);
 

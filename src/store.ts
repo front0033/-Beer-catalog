@@ -9,5 +9,5 @@ export const BeerCollectionStore = BeerCollection.create({ items: [] });
 export const ApiErrorsStore = ApiErrors.create({ errors: [] });
 export const CartStore = Cart.create({ items: [] });
 export const BreaadCrumbsStore = BreadCrumbsModel.create({
-  items: [{ id: 'catalog', label: 'Catalog', link: routes.main() }],
+  items: [{ id: 'catalog', label: 'Catalog', url: routes.main() }],
 });

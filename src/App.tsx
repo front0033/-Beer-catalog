@@ -28,7 +28,7 @@ const App: React.FC = () => (
       <Breadcrumb style={{ margin: '16px 0', fontSize: 18 }}>
         {BreaadCrumbsStore.items.toJSON().map((item) => (
           <Breadcrumb.Item key={item.id}>
-            <Link to={item.link}>{item.label}</Link>
+            <Link to={item.url}>{item.label}</Link>
           </Breadcrumb.Item>
         ))}
       </Breadcrumb>

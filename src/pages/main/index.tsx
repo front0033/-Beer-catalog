@@ -18,6 +18,7 @@ const MainPage = () => {
   const { category } = useParams<{ category: string }>();
 
   React.useEffect(() => {
+    BreaadCrumbsStore.set([{ id: category, label: `Catalog ${category}`, url: routes.mainWithCategory(category) }]);
     if (category) {
       BeerCollectionStore.loadByParams(
         category.includes('strength')
@@ -26,11 +27,6 @@ const MainPage = () => {
       );
     }
   }, [category]);
-
-  React.useEffect(() => {
-    BreaadCrumbsStore.setOne();
-    BeerCollectionStore.loadByParams();
-  }, []);
 
   const handleSearch = (value: string) => {
     BeerCollectionStore.loadByParams({ beer_name: value });
