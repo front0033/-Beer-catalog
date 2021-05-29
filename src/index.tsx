@@ -1,16 +1,19 @@
 import React from 'react';
 
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import 'antd/dist/antd.css';
+import routes from 'routes';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import 'antd/dist/antd.css';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router basename={process.env.PUBLIC_URL}>
-      <App />
+      <Route path={routes.mainWithCategory()}>
+        <App />
+      </Route>
     </Router>
   </React.StrictMode>,
   document.getElementById('root')
