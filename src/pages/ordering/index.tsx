@@ -47,6 +47,7 @@ const Ordering: React.FC<{}> = () => {
                 name={OrderFields.city}
                 label="City/Town"
                 rules={[{ required: true }]}
+                validateTrigger="onBlur"
                 help={!!item.propertyValidation(OrderFields.city) && 'Неверный формат'}
               >
                 <Input placeholder="Prague" value={item.city || ''} onChange={handleChange(OrderFields.city)} />
@@ -57,6 +58,7 @@ const Ordering: React.FC<{}> = () => {
                 name={OrderFields.street}
                 label="Street"
                 rules={[{ required: true }]}
+                validateTrigger="onBlur"
                 help={!!item.propertyValidation(OrderFields.street) && 'Неверный формат'}
               >
                 <Input placeholder="Parizhska" value={item.street || ''} onChange={handleChange(OrderFields.street)} />
@@ -67,6 +69,7 @@ const Ordering: React.FC<{}> = () => {
                 name={OrderFields.houseNumber}
                 label="House number"
                 rules={[{ required: true }]}
+                validateTrigger="onBlur"
                 help={!!item.propertyValidation(OrderFields.houseNumber) && 'Неверный формат'}
               >
                 <Input
@@ -84,6 +87,7 @@ const Ordering: React.FC<{}> = () => {
                 name={OrderFields.name}
                 label="Name"
                 rules={[{ required: true }]}
+                validateTrigger="onBlur"
                 help={!!item.propertyValidation(OrderFields.name) && 'Неверный формат'}
               >
                 <Input value={item.name || ''} onChange={handleChange(OrderFields.name)} />
@@ -94,6 +98,7 @@ const Ordering: React.FC<{}> = () => {
                 name={OrderFields.email}
                 label="Email"
                 rules={[{ required: true }]}
+                validateTrigger="onBlur"
                 help={!!item.propertyValidation(OrderFields.email) && 'Неверный формат email'}
               >
                 <Input
@@ -108,6 +113,7 @@ const Ordering: React.FC<{}> = () => {
                 name={OrderFields.phone}
                 label="Phone"
                 rules={[{ required: true }]}
+                validateTrigger="onBlur"
                 help={!!item.propertyValidation(OrderFields.phone) && 'Неверный формат номера телефона'}
               >
                 <Input
@@ -125,6 +131,7 @@ const Ordering: React.FC<{}> = () => {
                 name={OrderFields.cardNumber}
                 label="card numder"
                 rules={[{ required: true }]}
+                validateTrigger="onBlur"
                 help={!!item.propertyValidation(OrderFields.cardNumber) && 'Неверный формат карты'}
               >
                 <Input
@@ -137,7 +144,9 @@ const Ordering: React.FC<{}> = () => {
           </div>
           <div className="cart_button-container">
             <Link to={routes.order(category)}>
-              <Button type="primary">Buy $$$</Button>
+              <Button disabled={item.isValid} type="primary">
+                Buy $$$
+              </Button>
             </Link>
           </div>
         </>

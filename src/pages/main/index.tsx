@@ -24,10 +24,10 @@ const MainPage = () => {
   const { category } = useParams<{ category: string }>();
 
   React.useEffect(() => {
-    BreaadCrumbsStore.set([
-      { id: category, label: `Catalog ${getLabelBySubUrl(category)}`, url: routes.mainWithCategory(category) },
-    ]);
     if (category) {
+      BreaadCrumbsStore.set([
+        { id: category, label: `Catalog ${getLabelBySubUrl(category)}`, url: routes.mainWithCategory(category) },
+      ]);
       BeerCollectionStore.loadByParams(
         category.includes('strength')
           ? ABVBeerTypeConfig[category as BeerStrengthType].params
@@ -47,7 +47,7 @@ const MainPage = () => {
           <Search placeholder="please input text" enterButton="Search" size="large" onSearch={handleSearch} />
         </div>
         {!!countIdsFromUrl(search) && (
-          <Link to={routes.cart() + search}>
+          <Link to={routes.cart(category) + search}>
             <Button className="actions-container_item" icon={<ShoppingCartOutlined />}>
               In Cart {countIdsFromUrl(search)} items
             </Button>

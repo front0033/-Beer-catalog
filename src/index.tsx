@@ -11,7 +11,7 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
   <React.StrictMode>
     <Router basename={process.env.PUBLIC_URL}>
-      <Route path={routes.mainWithCategory()}>
+      <Route path={routes.main()}>
         <App />
       </Route>
     </Router>
