@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/Beer-catalog/static/css/main.d6617a4f.chunk.css",
-    "main.js": "/Beer-catalog/static/js/main.068b9e83.chunk.js",
-    "main.js.map": "/Beer-catalog/static/js/main.068b9e83.chunk.js.map",
+    "main.js": "/Beer-catalog/static/js/main.f3786379.chunk.js",
+    "main.js.map": "/Beer-catalog/static/js/main.f3786379.chunk.js.map",
     "runtime-main.js": "/Beer-catalog/static/js/runtime-main.fa4527e0.js",
     "runtime-main.js.map": "/Beer-catalog/static/js/runtime-main.fa4527e0.js.map",
     "static/css/2.1e58ee36.chunk.css": "/Beer-catalog/static/css/2.1e58ee36.chunk.css",
-    "static/js/2.838e2c5d.chunk.js": "/Beer-catalog/static/js/2.838e2c5d.chunk.js",
-    "static/js/2.838e2c5d.chunk.js.map": "/Beer-catalog/static/js/2.838e2c5d.chunk.js.map",
+    "static/js/2.eb0de05c.chunk.js": "/Beer-catalog/static/js/2.eb0de05c.chunk.js",
+    "static/js/2.eb0de05c.chunk.js.map": "/Beer-catalog/static/js/2.eb0de05c.chunk.js.map",
     "static/js/3.5fba6cdd.chunk.js": "/Beer-catalog/static/js/3.5fba6cdd.chunk.js",
     "static/js/3.5fba6cdd.chunk.js.map": "/Beer-catalog/static/js/3.5fba6cdd.chunk.js.map",
     "index.html": "/Beer-catalog/index.html",
     "static/css/2.1e58ee36.chunk.css.map": "/Beer-catalog/static/css/2.1e58ee36.chunk.css.map",
     "static/css/main.d6617a4f.chunk.css.map": "/Beer-catalog/static/css/main.d6617a4f.chunk.css.map",
-    "static/js/2.838e2c5d.chunk.js.LICENSE.txt": "/Beer-catalog/static/js/2.838e2c5d.chunk.js.LICENSE.txt"
+    "static/js/2.eb0de05c.chunk.js.LICENSE.txt": "/Beer-catalog/static/js/2.eb0de05c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.fa4527e0.js",
     "static/css/2.1e58ee36.chunk.css",
-    "static/js/2.838e2c5d.chunk.js",
+    "static/js/2.eb0de05c.chunk.js",
     "static/css/main.d6617a4f.chunk.css",
-    "static/js/main.068b9e83.chunk.js"
+    "static/js/main.f3786379.chunk.js"
   ]
 }
