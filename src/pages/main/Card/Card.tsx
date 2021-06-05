@@ -41,7 +41,7 @@ const BeerCard: React.FC<IBeerCardProps> = ({ category, data }) => {
             }
           />
         </Link>,
-        <Link to={routes.cart() + search}>
+        <Link to={routes.cart(category) + search}>
           <Button className="actions-container_item" icon={<ShoppingCartOutlined />} />
         </Link>,
       ]}
