@@ -82,19 +82,4 @@ export enum ParamsNames {
   ids = 'ids',
 }
 
-export interface IBeerListParams {
-  abv_gt?: number;
-  abv_lt?: number;
-  ibu_gt?: number;
-  ibu_lt?: number;
-  ebc_gt?: number;
-  ebc_lt?: number;
-  beer_name?: string;
-  yeast?: string;
-  brewed_before?: string; // example 10-2011
-  brewed_after?: string; // example 10-2011
-  hops?: string;
-  malt?: string;
-  food?: string;
-  ids?: string; // example 1|2|4|7
-}
+export type TBeerListParams = Partial<Record<ParamsNames, string | number>>;

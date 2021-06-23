@@ -1,6 +1,6 @@
-import { IBeerListParams } from 'api/types';
+import { TBeerListParams } from 'api/types';
 
-type BeerMenuConfig<T extends string> = Record<T, { params: IBeerListParams; label: string }>;
+type BeerMenuConfig<T extends string> = Record<T, { params: TBeerListParams; label: string }>;
 
 export type BeerStrengthType = 'hard' | 'middle' | 'light';
 export type BeerColoursType =

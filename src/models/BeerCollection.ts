@@ -1,7 +1,7 @@
 import { types, flow, applySnapshot } from 'mobx-state-tree';
 import beerApi from 'api/beer';
 import { ApiErrorsStore } from 'store';
-import { IBeerListParams } from 'api/types';
+import { TBeerListParams } from 'api/types';
 import BeerModel from './Beer';
 import { RemoteDataModel } from './RemoteData';
 
@@ -14,7 +14,7 @@ const BeerCollection = types
   )
   .named('BeerCollection')
   .actions((self) => {
-    const loadByParams = flow(function* loadAll(params: IBeerListParams = {}) {
+    const loadByParams = flow(function* loadAll(params: TBeerListParams = {}) {
       self.setPending();
 
       try {
