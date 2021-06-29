@@ -7,7 +7,7 @@ import BeerDetails from 'pages/detail';
 import Ordering from 'pages/ordering';
 import MainPage from 'pages/main';
 
-import { Switch, Route, Link, useParams, Redirect } from 'react-router-dom';
+import { Switch, Route, Link, useParams } from 'react-router-dom';
 
 import routes from 'routes';
 import BeerCart from 'pages/cart';
@@ -60,7 +60,6 @@ const App: React.FC = () => {
         </Layout>
       </Content>
       <Footer style={{ textAlign: 'center' }}>Beer Catalog developed by Igor Bezdeneznhykh</Footer>
-      {!category && <Redirect to={routes.mainWithCategory('lightBlonde')} />}
     </Layout>
   );
 };

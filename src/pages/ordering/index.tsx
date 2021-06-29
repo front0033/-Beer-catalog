@@ -90,6 +90,7 @@ const Ordering: React.FC<{}> = () => {
               <Form.Item
                 name={OrderFields.houseNumber}
                 label="House number"
+                help={item.errors[OrderFields.houseNumber]}
                 validateStatus={item.errors[OrderFields.houseNumber] ? 'error' : ''}
               >
                 <Input

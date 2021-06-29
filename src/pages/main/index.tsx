@@ -33,6 +33,8 @@ const MainPage = () => {
           ? ABVBeerTypeConfig[category as BeerStrengthType].params
           : ColorBeerTypeConfig[category as BeerColoursType].params
       );
+    } else {
+      BeerCollectionStore.loadByParams(ColorBeerTypeConfig.gold.params);
     }
   }, [category]);
 
