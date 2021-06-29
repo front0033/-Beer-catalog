@@ -29,9 +29,7 @@ const MainPage = () => {
         { id: category, label: `Catalog ${getLabelBySubUrl(category)}`, url: routes.mainWithCategory(category) },
       ]);
       BeerCollectionStore.loadByParams(
-        category.includes('strength')
-          ? ABVBeerTypeConfig[category as BeerStrengthType].params
-          : ColorBeerTypeConfig[category as BeerColoursType].params
+        (ABVBeerTypeConfig[category as BeerStrengthType] || ColorBeerTypeConfig[category as BeerColoursType]).params
       );
     } else {
       BeerCollectionStore.loadByParams(ColorBeerTypeConfig.gold.params);
