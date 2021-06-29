@@ -1,7 +1,7 @@
 import { Form, Alert, Button, Card, Input, Typography } from 'antd';
 import { observer } from 'mobx-react';
 import * as React from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import routes from 'routes';
 import Order, { initialValues, OrderFields } from 'models/Order';
 import { countIdsFromUrl } from 'utils/queryStringHeplers';
@@ -46,7 +46,7 @@ const Ordering: React.FC<{}> = () => {
     }
 
     // eslint-disable-next-line no-alert
-    alert(JSON.stringify(item));
+    alert(`Data for send: \n${JSON.stringify(item)}`);
   };
 
   return (
@@ -145,7 +145,7 @@ const Ordering: React.FC<{}> = () => {
                   placeholder="+7-999-000-00-00"
                   value={item.phone || ''}
                   onChange={handleChange(OrderFields.phone)}
-                  onBlur={handleBlure(OrderFields.city)}
+                  onBlur={handleBlure(OrderFields.phone)}
                 />
               </Form.Item>
             </div>
@@ -169,11 +169,9 @@ const Ordering: React.FC<{}> = () => {
             </div>
           </div>
           <div className="cart_button-container">
-            <Link to={routes.order(category)}>
-              <Button onClick={handleSubmit} type="primary">
-                Buy $$$
-              </Button>
-            </Link>
+            <Button onClick={handleSubmit} type="primary">
+              Buy $$$
+            </Button>
           </div>
         </>
       )}

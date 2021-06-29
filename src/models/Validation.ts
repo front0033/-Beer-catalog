@@ -75,11 +75,12 @@ const ValidationModel = types
 
       return true;
     };
-
     const validate = (): boolean => {
-      const isValid = true;
+      let isValid = true;
 
-      Object.keys(self.validation).forEach((key) => (validateField(key) ? isValid : false));
+      Object.keys(self.validation).forEach((key) => {
+        isValid = validateField(key) ? isValid : false;
+      });
 
       return isValid;
     };
