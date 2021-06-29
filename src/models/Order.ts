@@ -1,7 +1,6 @@
-import { cast, types } from 'mobx-state-tree';
-import Ajv from 'ajv';
-import addFormats from 'ajv-formats';
+import { types } from 'mobx-state-tree';
 import BaseModel from './Base';
+import ValidationModel, { MUST_BE_EMAIL, MUST_BE_PHONE, regexpValidation, required } from './Validation';
 
 export enum OrderFields {
   city = 'city',
@@ -33,37 +32,17 @@ const OrderModel = types.model({
   [OrderFields.cardNumber]: types.maybeNull(types.string),
 });
 
-const ajv = new Ajv();
-addFormats(ajv);
-
-const schema = {
-  properties: {
-    [OrderFields.city]: { type: 'string' },
-    [OrderFields.street]: { type: 'string' },
-    [OrderFields.houseNumber]: { type: 'number' },
-    [OrderFields.name]: { type: 'string' },
-    [OrderFields.email]: { format: 'email' },
-    [OrderFields.phone]: { type: 'number' },
-    [OrderFields.cardNumber]: { type: 'number' },
-  },
-};
-
-const validator = ajv.compile(schema);
-
-const Validator = types.model('Validator', {} as Record<OrderFields, string | number>).views((self) => ({
-  get isValid() {
-    return validator(self);
-  },
-  propertyValidation(prop: OrderFields) {
-    const obj = {
-      [prop]: cast(self[prop]),
-    };
-
-    validator(obj);
-    return validator.errors;
+const ValidatedItem = types.compose(BaseModel, ValidationModel, OrderModel).volatile(() => ({
+  errors: {},
+  validation: {
+    [OrderFields.city]: [required],
+    [OrderFields.street]: [required],
+    [OrderFields.houseNumber]: [required],
+    [OrderFields.name]: [required],
+    [OrderFields.email]: [required, regexpValidation(/.+@.+\..+/i, MUST_BE_EMAIL)],
+    [OrderFields.phone]: [required, regexpValidation(/^((\+7|7|8)+([0-9]){10})$/, MUST_BE_PHONE)],
+    [OrderFields.cardNumber]: [required],
   },
 }));
-
-const ValidatedItem = types.compose(BaseModel, OrderModel, Validator);
 
 export default ValidatedItem;

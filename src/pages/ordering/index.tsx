@@ -32,7 +32,21 @@ const Ordering: React.FC<{}> = () => {
   }, [productsLength, search, category]);
 
   const handleChange = (fieldName: OrderFields): React.ChangeEventHandler<HTMLInputElement> => (e) => {
-    item.setField(fieldName, e.target.value);
+    const { value } = e.target;
+    item.setField(fieldName, fieldName === OrderFields.houseNumber ? +value : value);
+  };
+
+  const handleBlure = (fieldName: OrderFields) => () => {
+    item.validateField(fieldName);
+  };
+
+  const handleSubmit = () => {
+    if (!item.validate()) {
+      return;
+    }
+
+    // eslint-disable-next-line no-alert
+    alert(JSON.stringify(item));
   };
 
   return (
@@ -46,36 +60,43 @@ const Ordering: React.FC<{}> = () => {
               <Form.Item
                 name={OrderFields.city}
                 label="City/Town"
-                rules={[{ required: true }]}
-                validateTrigger="onBlur"
-                help={!!item.propertyValidation(OrderFields.city) && 'Неверный формат'}
+                help={item.errors[OrderFields.city]}
+                validateStatus={item.errors[OrderFields.city] ? 'error' : ''}
               >
-                <Input placeholder="Prague" value={item.city || ''} onChange={handleChange(OrderFields.city)} />
+                <Input
+                  placeholder="Prague"
+                  value={item.city || ''}
+                  onChange={handleChange(OrderFields.city)}
+                  onBlur={handleBlure(OrderFields.city)}
+                />
               </Form.Item>
             </div>
             <div className="order-field">
               <Form.Item
                 name={OrderFields.street}
                 label="Street"
-                rules={[{ required: true }]}
-                validateTrigger="onBlur"
-                help={!!item.propertyValidation(OrderFields.street) && 'Неверный формат'}
+                help={item.errors[OrderFields.street]}
+                validateStatus={item.errors[OrderFields.street] ? 'error' : ''}
               >
-                <Input placeholder="Parizhska" value={item.street || ''} onChange={handleChange(OrderFields.street)} />
+                <Input
+                  placeholder="Parizhska"
+                  value={item.street || ''}
+                  onChange={handleChange(OrderFields.street)}
+                  onBlur={handleBlure(OrderFields.street)}
+                />
               </Form.Item>
             </div>
             <div className="order-field">
               <Form.Item
                 name={OrderFields.houseNumber}
                 label="House number"
-                rules={[{ required: true }]}
-                validateTrigger="onBlur"
-                help={!!item.propertyValidation(OrderFields.houseNumber) && 'Неверный формат'}
+                validateStatus={item.errors[OrderFields.houseNumber] ? 'error' : ''}
               >
                 <Input
                   placeholder="1"
                   value={item.houseNumber || ''}
                   onChange={handleChange(OrderFields.houseNumber)}
+                  onBlur={handleBlure(OrderFields.houseNumber)}
                 />
               </Form.Item>
             </div>
@@ -86,25 +107,29 @@ const Ordering: React.FC<{}> = () => {
               <Form.Item
                 name={OrderFields.name}
                 label="Name"
-                rules={[{ required: true }]}
                 validateTrigger="onBlur"
-                help={!!item.propertyValidation(OrderFields.name) && 'Неверный формат'}
+                help={item.errors[OrderFields.name]}
+                validateStatus={item.errors[OrderFields.name] ? 'error' : ''}
               >
-                <Input value={item.name || ''} onChange={handleChange(OrderFields.name)} />
+                <Input
+                  value={item.name || ''}
+                  onChange={handleChange(OrderFields.name)}
+                  onBlur={handleBlure(OrderFields.name)}
+                />
               </Form.Item>
             </div>
             <div className="order-field">
               <Form.Item
                 name={OrderFields.email}
                 label="Email"
-                rules={[{ required: true }]}
-                validateTrigger="onBlur"
-                help={!!item.propertyValidation(OrderFields.email) && 'Неверный формат email'}
+                help={item.errors[OrderFields.email]}
+                validateStatus={item.errors[OrderFields.email] ? 'error' : ''}
               >
                 <Input
                   placeholder="example@gmai.com"
                   value={item.email || ''}
                   onChange={handleChange(OrderFields.email)}
+                  onBlur={handleBlure(OrderFields.email)}
                 />
               </Form.Item>
             </div>
@@ -112,14 +137,14 @@ const Ordering: React.FC<{}> = () => {
               <Form.Item
                 name={OrderFields.phone}
                 label="Phone"
-                rules={[{ required: true }]}
-                validateTrigger="onBlur"
-                help={!!item.propertyValidation(OrderFields.phone) && 'Неверный формат номера телефона'}
+                help={item.errors[OrderFields.phone]}
+                validateStatus={item.errors[OrderFields.phone] ? 'error' : ''}
               >
                 <Input
                   placeholder="+7-999-000-00-00"
                   value={item.phone || ''}
                   onChange={handleChange(OrderFields.phone)}
+                  onBlur={handleBlure(OrderFields.city)}
                 />
               </Form.Item>
             </div>
@@ -130,21 +155,21 @@ const Ordering: React.FC<{}> = () => {
               <Form.Item
                 name={OrderFields.cardNumber}
                 label="card numder"
-                rules={[{ required: true }]}
-                validateTrigger="onBlur"
-                help={!!item.propertyValidation(OrderFields.cardNumber) && 'Неверный формат карты'}
+                help={item.errors[OrderFields.cardNumber]}
+                validateStatus={item.errors[OrderFields.cardNumber] ? 'error' : ''}
               >
                 <Input
                   placeholder="example@gmai.com"
                   value={item.city || ''}
                   onChange={handleChange(OrderFields.cardNumber)}
+                  onBlur={handleBlure(OrderFields.cardNumber)}
                 />
               </Form.Item>
             </div>
           </div>
           <div className="cart_button-container">
             <Link to={routes.order(category)}>
-              <Button disabled={item.isValid} type="primary">
+              <Button onClick={handleSubmit} type="primary">
                 Buy $$$
               </Button>
             </Link>
