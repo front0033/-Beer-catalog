@@ -28,6 +28,7 @@ const Cart = types
       try {
         const { data } = yield beerApi.getByIds(ids);
 
+        // что бы хорошо было видно прелоадер, делаем задержку 400 мс
         setTimeout(() => {
           applySnapshot(self.items, data);
           self.setLoadSuccess();

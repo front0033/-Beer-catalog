@@ -19,7 +19,7 @@ const BeerCollection = types
 
       try {
         const { data } = yield beerApi.get(params);
-
+        // что бы хорошо было видно прелоадер, делаем задержку 400 мс
         setTimeout(() => {
           applySnapshot(self.items, data);
           self.setLoadSuccess();

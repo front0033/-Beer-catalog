@@ -14,7 +14,7 @@ const BeerDetail = types
       self.setPending();
       try {
         const { data } = yield beerApi.getById(id);
-
+        // что бы хорошо было видно прелоадер, делаем задержку 400 мс
         setTimeout(() => {
           applySnapshot(self, data[0]);
           self.setLoadSuccess();
